@@ -270,7 +270,7 @@ function GetPlayerEmbed(o, c) {
 		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
 	case 'angel':
 			$('#ps').before("<hr/>");
-			$('#ps').text("The Patreon link is not associated with Frogdog.");
+			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://player.angelthump.com/?channel=" + c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	
 	}	
