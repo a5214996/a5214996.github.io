@@ -14,7 +14,7 @@ function refreshChat(){
 
 function handleVisibilityChange() {
   if (document.hidden)
-    document.title = "Hot Dudes";
+    document.title = "HotDudes";
   else 
     document.title = "Do not share";
 }
