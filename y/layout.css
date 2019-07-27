@@ -480,12 +480,12 @@ hr{
 }
 
 span.d{
-	color: #fda470;
+	color: #ff6600;
 	font-family: 'Knewave', cursive;
 }
 
 span#ds{
-	color: #fda470;
+	color: #ff6600;
 	font-family: 'Knewave', cursive;
 }
 
@@ -506,9 +506,9 @@ span#ps{
 }
 
 #\23 nav > a{
-	color:#fda470;
+	color:#ff6600;
 }
 
 #\23 nav > div.topnav-right > a:nth-child(1){
-	color:#fda470;
+	color:#ff6600;
 }
