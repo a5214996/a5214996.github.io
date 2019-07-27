@@ -14,7 +14,7 @@ function refreshChat(){
 
 function handleVisibilityChange() {
   if (document.hidden)
-    document.title = "Frogdog";
+    document.title = "Hotdudes";
   else 
     document.title = "Do not share";
 }
