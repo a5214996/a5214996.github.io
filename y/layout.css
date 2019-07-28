@@ -442,7 +442,7 @@ span.vidOptions{
   font-size: 30px;
   font-weight: 800;
   text-decoration: none;
-  color: #F48E05;
+  color: #FFC41A;
 }
 
 .popup .content {
@@ -480,12 +480,12 @@ hr{
 }
 
 span.d{
-	color: #F48E05;
+	color: #FFC41A;
 	font-family: 'Knewave', cursive;
 }
 
 span#ds{
-	color: #F48E05;
+	color: #FFC41A;
 	font-family: 'Knewave', cursive;
 }
 
@@ -506,9 +506,9 @@ span#ps{
 }
 
 #\23 nav > a{
-	color:#F48E05;
+	color:#FFC41A;
 }
 
 #\23 nav > div.topnav-right > a:nth-child(1){
-	color:#F48E05;
+	color:#FFC41A;
 }
