@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("21%");
-$('#ds').text("Tman, Fetty"); 
+$('.d').text("33%");
+$('#ds').text("Tman, Fetty, Acro"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
