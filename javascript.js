@@ -5,7 +5,7 @@ var wait = "";
 var mobile = false;
 
 $('.d').text("0%");
-$('#ds').text("); 
+$('#ds').text(""); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
