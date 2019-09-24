@@ -4,9 +4,6 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("30%");
-$('#ds').text("Subterfuge, Tman"); 
-
 function refreshChat(){
 	var chat = document.getElementById("chat");
 	$( '#chat' ).attr( 'src', function ( i, val ) { return val; });
