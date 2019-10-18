@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("70%");
-$('#ds').text("Whiskey, Poppin' Fresh, Nivke, Tman"); 
+$('.d').text("80%");
+$('#ds').text("Resh, Whiskey, Poppin' Fresh, Nivke, Tman"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
