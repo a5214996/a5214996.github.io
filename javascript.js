@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("80%");
-$('#ds').text("Fracus, Vern, Anonymous"); 
+$('.d').text("100%");
+$('#ds').text("LebronzoJames, Fracus, Vern, Anonymous"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
