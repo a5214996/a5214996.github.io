@@ -5,7 +5,7 @@ var wait = "";
 var mobile = false;
 
 $('.d').text("0%");
-$('#ds').text("LebronzoJames (Dec)"); 
+$('#ds').text("Spaceghost, LebronzoJames"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
