@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("0%");
-$('#ds').text("Spaceghost, LebronzoJames"); 
+$('.d').text("100%");
+$('#ds').text("Subterfuge, Spaceghost, LebronzoJames"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
