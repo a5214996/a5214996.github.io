@@ -5,7 +5,7 @@ var wait = "";
 var mobile = false;
 
 $('.d').text("115%");
-$('#ds').text("Subterfuge, CallmeV, Spaceghost, LebronzoJames"); 
+$('#ds').text("Subterfuge, Carlos, CallmeV, Tman, Spaceghost, LebronzoJames"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
