@@ -4,7 +4,7 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("115%");
+$('.d').text("160%");
 $('#ds').text("Subterfuge, Carlos, CallmeV, Tman, Spaceghost, LebronzoJames"); 
 
 function refreshChat(){
