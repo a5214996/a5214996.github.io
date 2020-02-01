@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("185%");
-$('#ds').text("Subterfuge, Carlos, CallmeV, Acro, Tman, Spaceghost, LebronzoJames"); 
+$('.d').text("100%");
+$('#ds').text("Roughpuppet"); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
