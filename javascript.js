@@ -4,8 +4,8 @@ var stop = "modpoll";
 var wait = "";
 var mobile = false;
 
-$('.d').text("118%");
-$('#ds').text("Carlos, Freddylad, PrimoTomatoSauce, Iceiceice333, Tman, AirTupac"); 
+$('.d').text("0%");
+$('#ds').text(""); 
 
 function refreshChat(){
 	var chat = document.getElementById("chat");
