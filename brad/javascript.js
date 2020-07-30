@@ -289,7 +289,7 @@ function GetPlayerEmbed(o, c) {
 }
 
 function updateServer(o, c, s) {
-	$('#video-wrapper').html(setServer(o, c, s)
+	$('#video-wrapper').html(setServer(o, c, s));
 }
 
 function setServer(o, c, s) {
