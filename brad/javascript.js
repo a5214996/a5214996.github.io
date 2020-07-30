@@ -271,12 +271,12 @@ function GetPlayerEmbed(o, c) {
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
-		return `<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select a server:<br/><br/>
-		<a href="#" onclick="updateServer('w');return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/>
-		<a href="#" onclick="updateServer('e1');return false;" style="font-size:50px;color:#FFF"><b>East 1</b></a><br/>
-		<a href="#" onclick="updateServer('e2');return false;" style="font-size:50px;color:#FFF"><b>East 2</b></a><br/>
-		<a href="#" onclick="updateServer('eu');return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a><br/>
-		<a href="#" onclick="updateServer('sea');return false;" style="font-size:50px;color:#FFF"><b>SEA</b></a></h1>`;
+		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select server:<br/><br/>
+		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a><br/>
+		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a><br/>
+		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a><br/>
+		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a><br/>
+		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a></h1>`;
 	}	
 }
 
@@ -321,7 +321,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sgp1");
 				break;
 		}
-		alert(`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`);
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	}
 }
 
