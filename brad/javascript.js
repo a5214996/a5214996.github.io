@@ -272,6 +272,7 @@ function GetPlayerEmbed(o, c) {
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
+		<a href="https://www.patreon.com/join/angelthump"><img src="https://imgur.com/DeI5NZR.png" alt="Angelthump"></a>
 		
 		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a> |
 		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a> |
@@ -322,17 +323,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sgp1");
 				break;
 		}
-		return `<div id="player">
-					<div id="overlay-top">
-					</div>
-					<div class="vidOptions">
-						<nav>
-							<ul>
-								<li><a class="fullscreen" href="javascript:void(0);" onclick="fullscreenVideo();"><span class="vidOptions">Fullscreen</span></i></a></li>
-							</ul> 
-						</nav>
-					</div>
-				</div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	}
 }
 
