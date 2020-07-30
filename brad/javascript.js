@@ -34,6 +34,10 @@ function updateVideo() {
     })
 }
 
+function updateServer(s){
+	$('#video-wrapper').html(serverEmbed(o, c))
+	re`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+}
 
 function refreshVideo(){
 	updateVideo();
@@ -142,7 +146,12 @@ function SetPlayer(o, c) {
     } else {
         o = "offline"
     }
+	
+	if(o="angels"){
+		$('#video-wrapper').html(GetPlayerEmbedServers(o, c))
+	}else{
     $('#video-wrapper').html(GetPlayerEmbed(o, c))
+	}
 }
 
 
@@ -233,8 +242,6 @@ function GetPlayerEmbed(o, c) {
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'rtmp':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,type:"rtmp",rtmp: {bufferlength:3,},file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
-	case 'aclappr':
-		return `<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select a server:<br/><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>East</b></a><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a></h1>`;
 	case 'clappr':
 		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	case 'drive':
@@ -271,8 +278,42 @@ function GetPlayerEmbed(o, c) {
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	
+	case 'angels':
+		return `<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select a server:<br/><br/>
+		<a href="#" onclick="updateServer(o, c, 'w');return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/>
+		<a href="#" onclick="updateServer(o, c, 'e1');return false;" style="font-size:50px;color:#FFF"><b>East 1</b></a><br/>
+		<a href="#" onclick="updateServer(o, c, 'e2');return false;" style="font-size:50px;color:#FFF"><b>East 2</b></a><br/>
+		<a href="#" onclick="updateServer(o, c, 'eu');return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a><br/>
+		<a href="#" onclick="updateServer(o, c, 'sea');return false;" style="font-size:50px;color:#FFF"><b>SEA</b></a></h1>`;
 	}	
+}
+
+function updateServer(o, c, s) {
+	$('#video-wrapper').html(setServer(o, c, s)
+}
+
+function setServer(o, c, s) {
+	var s = "";
+	if(o == "angels"){
+		switch(s){
+			case 'w':
+				c = c.replace("#", "sfo1");
+				break;
+			case 'e1':
+				c = c.replace("#", "nyc1"");"nyc1";
+				break;
+			case 'e2':
+				c = c.replace("#", "tor1");
+				break;
+			case 'eu':
+				c = c.replace("#", "lon1");
+				break;
+			case 'sea':
+				c = c.replace("#", "sgp1");
+				break;
+		}
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+	}
 }
 
 function SetChat() {
