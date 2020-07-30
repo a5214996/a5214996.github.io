@@ -300,7 +300,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sfo1");
 				break;
 			case 'e1':
-				c = c.replace("#", "nyc1"");"nyc1";
+				c = c.replace("#", "nyc1");
 				break;
 			case 'e2':
 				c = c.replace("#", "tor1");
