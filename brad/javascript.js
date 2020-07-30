@@ -304,19 +304,20 @@ function setServer(o, c, s) {
 	if(o == "angels"){
 		switch(s){
 			case 'w':
-				c = c.replace("/\#/g", "sfo1");
+				alert(c.replace("/^#/", "sfo1"));
+				c = c.replace("/^#/", "sfo1");
 				break;
 			case 'e1':
-				c = c.replace("/\#/g", "nyc1");
+				c = c.replace("/^#/", "nyc1");
 				break;
 			case 'e2':
-				c = c.replace("/\#/g", "tor1");
+				c = c.replace("/^#/", "tor1");
 				break;
 			case 'eu':
-				c = c.replace("/\#/g", "lon1");
+				c = c.replace("/^#/", "lon1");
 				break;
 			case 'sea':
-				c = c.replace("/\#/g", "sgp1");
+				c = c.replace("/^#/", "sgp1");
 				break;
 		}
 		alert(`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`);
