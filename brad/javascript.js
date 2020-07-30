@@ -300,6 +300,7 @@ function updateServer(s) {
 
 function setServer(o, c, s) {
 	var s = "";
+	alert(o);
 	if(o == "angels"){
 		switch(s){
 			case 'w':
@@ -318,7 +319,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sgp1");
 				break;
 		}
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		alert(`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`);
 	}
 }
 
