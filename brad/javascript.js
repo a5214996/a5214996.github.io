@@ -299,23 +299,26 @@ function updateServer(s) {
 }
 
 function setServer(o, c, s) {
-	var s = "";
+	var res = getRes(o);
+	var w = res["w"];
+	var h = res["h"];
+		
 	if(o == "angels"){
 		switch(s){
 			case 'w':
-				c = c.replace("xx", "sfo1");
+				c = c.replace("#", "sfo1");
 				break;
 			case 'e1':
-				c = c.replace("xx", "nyc1");
+				c = c.replace("#", "nyc1");
 				break;
 			case 'e2':
-				c = c.replace("xx", "tor1");
+				c = c.replace("#", "tor1");
 				break;
 			case 'eu':
-				c = c.replace("xx", "lon1");
+				c = c.replace("#", "lon1");
 				break;
 			case 'sea':
-				c = c.replace("xx", "sgp1");
+				c = c.replace("#", "sgp1");
 				break;
 		}
 		alert(`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`);
