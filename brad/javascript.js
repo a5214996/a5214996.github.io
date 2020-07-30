@@ -271,7 +271,11 @@ function GetPlayerEmbed(o, c) {
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
-		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select server:<br/><br/>
+		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
+		
+		<a href="https://www.patreon.com/join/quackpack" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+		<a href="https://www.patreon.com/join/angelthump" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
+		
 		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a><br/>
 		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a><br/>
 		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a><br/>
