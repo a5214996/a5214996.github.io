@@ -147,11 +147,8 @@ function SetPlayer(o, c) {
         o = "offline"
     }
 	
-	if(o="angels"){
-		$('#video-wrapper').html(GetPlayerEmbedServers(o, c))
-	}else{
     $('#video-wrapper').html(GetPlayerEmbed(o, c))
-	}
+
 }
 
 
