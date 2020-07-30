@@ -273,13 +273,10 @@ function GetPlayerEmbed(o, c) {
 	case 'angels':
 		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
 		
-		<a href="https://www.patreon.com/bePatron?u=39403629" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-		<a href="https://www.patreon.com/bePatron?u=39403629" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
-		
-		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a><br/>
-		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a><br/>
-		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a><br/>
-		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a><br/>
+		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a> |
+		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a> |
+		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a> |
+		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a> |
 		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a></h1>`;
 	}	
 }
