@@ -278,7 +278,7 @@ function GetPlayerEmbed(o, c) {
 		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a> |
 		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a> |
 		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a></h1></br>
-		<a href="https://www.patreon.com/join/angelthump"><img src="https://imgur.com/DeI5NZR.png" alt="Angelthump"></a>`;
+		<a href="https://www.patreon.com/join/angelthump"><img src="https://i.imgur.com/nxzeGa4.png" alt="Angelthump"></a>`;
 	}	
 }
 
