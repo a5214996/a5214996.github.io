@@ -322,7 +322,17 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sgp1");
 				break;
 		}
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player">
+					<div id="overlay-top">
+					</div>
+					<div class="vidOptions">
+						<nav>
+							<ul>
+								<li><a class="fullscreen" href="javascript:void(0);" onclick="fullscreenVideo();"><span class="vidOptions">Fullscreen</span></i></a></li>
+							</ul> 
+						</nav>
+					</div>
+				</div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	}
 }
 
