@@ -234,7 +234,7 @@ function GetPlayerEmbed(o, c) {
 	case 'rtmp':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,type:"rtmp",rtmp: {bufferlength:3,},file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'aclappr':
-		return `<div id="player"></div>testing`;
+		return `<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select a server:<br/><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>East</b></a><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a></h1>`;
 	case 'clappr':
 		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	case 'drive':
