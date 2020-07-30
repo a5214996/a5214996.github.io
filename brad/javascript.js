@@ -34,10 +34,6 @@ function updateVideo() {
     })
 }
 
-function updateServer(s){
-	$('#video-wrapper').html(serverEmbed(o, c))
-	re`<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
-}
 
 function refreshVideo(){
 	updateVideo();
@@ -148,7 +144,6 @@ function SetPlayer(o, c) {
     }
 	
     $('#video-wrapper').html(GetPlayerEmbed(o, c))
-
 }
 
 
@@ -277,16 +272,30 @@ function GetPlayerEmbed(o, c) {
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 		return `<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select a server:<br/><br/>
-		<a href="#" onclick="updateServer(o, c, 'w');return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/>
-		<a href="#" onclick="updateServer(o, c, 'e1');return false;" style="font-size:50px;color:#FFF"><b>East 1</b></a><br/>
-		<a href="#" onclick="updateServer(o, c, 'e2');return false;" style="font-size:50px;color:#FFF"><b>East 2</b></a><br/>
-		<a href="#" onclick="updateServer(o, c, 'eu');return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a><br/>
-		<a href="#" onclick="updateServer(o, c, 'sea');return false;" style="font-size:50px;color:#FFF"><b>SEA</b></a></h1>`;
+		<a href="#" onclick="updateServer('w');return false;" style="font-size:50px;color:#FFF"><b>West</b></a><br/>
+		<a href="#" onclick="updateServer('e1');return false;" style="font-size:50px;color:#FFF"><b>East 1</b></a><br/>
+		<a href="#" onclick="updateServer('e2');return false;" style="font-size:50px;color:#FFF"><b>East 2</b></a><br/>
+		<a href="#" onclick="updateServer('eu');return false;" style="font-size:50px;color:#FFF"><b>Europe</b></a><br/>
+		<a href="#" onclick="updateServer('sea');return false;" style="font-size:50px;color:#FFF"><b>SEA</b></a></h1>`;
 	}	
 }
 
-function updateServer(o, c, s) {
-	$('#video-wrapper').html(setServer(o, c, s));
+function updateServer(s) {
+	$.ajax({
+        url: "video.json?" + Date.now(),
+        type: "GET",
+        dataType: "json",
+        success: function(responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+				$('#video-wrapper').html(setServer(responseTxt.host, responseTxt.channel, s));
+                sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
+            }
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+    })
 }
 
 function setServer(o, c, s) {
