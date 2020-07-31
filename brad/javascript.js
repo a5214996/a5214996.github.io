@@ -276,7 +276,10 @@ function GetPlayerEmbed(o, c) {
 		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>US East 1</b></a> |
 		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>US East 2</b></a> |
 		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a> |
-		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a> |
+		<a href="#" onclick="updateServer('eu1');return false;" style="font-size:30px;color:#FFF"><b>Europe 1</b></a> |
+		<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>Europe 2 </b></a> |
+		<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>Europe 3</b></a> |
+		<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>Russia</b></a> |
 		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/></br>
 		<!--<a href="https://www.patreon.com/join/angelthump" target="_blank"><img src="https://i.imgur.com/GXERebi.png" alt="Angelthump"></a>--></h1>`;
 	}	
@@ -316,8 +319,17 @@ function setServer(o, c, s) {
 			case 'e2':
 				c = c.replace("#", "tor1");
 				break;
-			case 'eu':
+			case 'eu1':
 				c = c.replace("#", "lon1");
+				break;
+			case 'eu2':
+				c = c.replace("#", "fra1");
+				break;
+			case 'eu3':
+				c = c.replace("#", "ams1");
+				break;
+			case 'ru':
+				c = c.replace("#", "blr1");
 				break;
 			case 'sea':
 				c = c.replace("#", "sgp1");
