@@ -345,7 +345,8 @@ span.vidOptions{
   vertical-align:center;
   display:block;
 }
-.topnav img{
+
+#logo img{
 	float:left;
 	padding: 0 0 0 8px;
 	display:block;
