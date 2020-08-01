@@ -345,6 +345,11 @@ span.vidOptions{
   vertical-align:center;
   display:block;
 }
+.topnav img{
+	float:left;
+	padding: 0 0 0 8px;
+	display:block;
+}
 
 /* Change the color of links on hover 
 .topnav a:hover {
@@ -352,14 +357,14 @@ span.vidOptions{
   color: black;
 }*/
 
-/* Centered section inside the top navigation */
+/* Centered section inside the top navigation
 .topnav-centered img {
   float: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
+}*/
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {

@@ -142,7 +142,6 @@ function SetPlayer(o, c) {
     } else {
         o = "offline"
     }
-	
     $('#video-wrapper').html(GetPlayerEmbed(o, c))
 }
 
@@ -270,59 +269,8 @@ function GetPlayerEmbed(o, c) {
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	case 'angels':
-		return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">Select server:<br/><br/>
-		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>West</b></a><br/>
-		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>East 1</b></a><br/>
-		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>East 2</b></a><br/>
-		<a href="#" onclick="updateServer('eu');return false;" style="font-size:30px;color:#FFF"><b>Europe</b></a><br/>
-		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a></h1>`;
+	
 	}	
-}
-
-function updateServer(s) {
-	$.ajax({
-        url: "video.json?" + Date.now(),
-        type: "GET",
-        dataType: "json",
-        success: function(responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success") {
-				$('#video-wrapper').html(setServer(responseTxt.host, responseTxt.channel, s));
-                sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
-            }
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message);
-        }
-    })
-}
-
-function setServer(o, c, s) {
-	var res = getRes(o);
-	var w = res["w"];
-	var h = res["h"];
-		
-	if(o == "angels"){
-		switch(s){
-			case 'w':
-				c = c.replace("#", "sfo1");
-				break;
-			case 'e1':
-				c = c.replace("#", "nyc1");
-				break;
-			case 'e2':
-				c = c.replace("#", "tor1");
-				break;
-			case 'eu':
-				c = c.replace("#", "lon1");
-				break;
-			case 'sea':
-				c = c.replace("#", "sgp1");
-				break;
-		}
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
-	}
 }
 
 function SetChat() {
