@@ -275,14 +275,14 @@ function GetPlayerEmbed(o, c) {
 		Select a server:<br/><br/>
 		<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>US East 1</b></a> |
 		<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>US East 2</b></a> |
-		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a><br/>
+		<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a><br/><br/>
 		<a href="#" onclick="updateServer('eu1');return false;" style="font-size:30px;color:#FFF"><b>EU 1</b></a> |
 		<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2 </b></a> |
 		<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>EU 3</b></a> |
 		<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>RU</b></a> |
 		<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/><br/>
-		Try a different server if you're lagging</h1>
-		<!--<a href="https://www.patreon.com/join/angelthump" target="_blank"><img src="https://i.imgur.com/GXERebi.png" alt="Angelthump"></a>-->`;
+		Try a different server if you're lagging
+		<!--<a href="https://www.patreon.com/join/angelthump" target="_blank"><img src="https://i.imgur.com/GXERebi.png" alt="Angelthump"></a>--></h1>`;
 	}	
 }
 
