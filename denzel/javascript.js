@@ -312,28 +312,28 @@ function setServer(o, c, s) {
 	if(o == "angels"){
 		switch(s){
 			case 'w':
-				c = c.replace("#", "sfo1");
+				c = c.replace("#", "sfo-haproxy");
 				break;
 			case 'e1':
-				c = c.replace("#", "tor1");
+				c = c.replace("#", "tor-haproxy");
 				break;
 			case 'e2':
-				c = c.replace("#", "nyc1");
+				c = c.replace("#", "nyc-haproxy");
 				break;
 			case 'eu1':
-				c = c.replace("#", "lon1");
+				c = c.replace("#", "lon-haproxy");
 				break;
 			case 'eu2':
-				c = c.replace("#", "fra1");
+				c = c.replace("#", "fra-haproxy");
 				break;
 			case 'eu3':
-				c = c.replace("#", "ams1");
+				c = c.replace("#", "ams-haproxy");
 				break;
 			case 'ru':
-				c = c.replace("#", "blr1");
+				c = c.replace("#", "blr-haproxy");
 				break;
 			case 'sea':
-				c = c.replace("#", "sgp1");
+				c = c.replace("#", "sgp-haproxy");
 				break;
 		}
 		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
