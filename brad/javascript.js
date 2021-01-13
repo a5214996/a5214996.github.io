@@ -442,5 +442,5 @@ $(document).ready(function(){
 		updateVideo();
 		//updatePoll();
 		setInterval(ajax30sInterval, 30000);
-		setInterval(SetChat, 1200000);
+		//setInterval(SetChat, 1200000);
 });

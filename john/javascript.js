@@ -268,7 +268,7 @@ function GetPlayerEmbed(o, c) {
 	case 'angel':
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
-            return "<iframe src=\"https://angelthump.com/"+ c + "/embed\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+            return "<iframe src=\"https://player.angelthump.com/?channel="+ c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 			return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
 			Select a server:<br/>
@@ -312,28 +312,28 @@ function setServer(o, c, s) {
 	if(o == "angels"){
 		switch(s){
 			case 'w':
-				c = c.replace("#", "sfo-haproxy");
+				c = c.replace("#", "sfo1");
 				break;
 			case 'e1':
-				c = c.replace("#", "tor-haproxy");
+				c = c.replace("#", "tor1");
 				break;
 			case 'e2':
-				c = c.replace("#", "nyc-haproxy");
+				c = c.replace("#", "nyc1");
 				break;
 			case 'eu1':
-				c = c.replace("#", "lon-haproxy");
+				c = c.replace("#", "lon1");
 				break;
 			case 'eu2':
-				c = c.replace("#", "fra-haproxy");
+				c = c.replace("#", "fra1");
 				break;
 			case 'eu3':
-				c = c.replace("#", "ams-haproxy");
+				c = c.replace("#", "ams1");
 				break;
 			case 'ru':
-				c = c.replace("#", "blr-haproxy");
+				c = c.replace("#", "blr1");
 				break;
 			case 'sea':
-				c = c.replace("#", "sgp-haproxy");
+				c = c.replace("#", "sgp1");
 				break;
 		}
 		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
@@ -442,5 +442,5 @@ $(document).ready(function(){
 		updateVideo();
 		//updatePoll();
 		setInterval(ajax30sInterval, 30000);
-		setInterval(SetChat, 1200000);
+		//setInterval(SetChat, 1200000);
 });
