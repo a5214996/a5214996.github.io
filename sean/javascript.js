@@ -276,7 +276,7 @@ function GetPlayerEmbed(o, c) {
 			<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>US East 2</b></a> |
 			<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a><br/>
 			<a href="#" onclick="updateServer('eu1');return false;" style="font-size:30px;color:#FFF"><b>EU 1</b></a> |
-			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2 </b></a> |
+			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2</b></a> |
 			<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>EU 3</b></a> |
 			<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>RU</b></a> |
 			<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/>
