@@ -238,7 +238,7 @@ function GetPlayerEmbed(o, c) {
 	case 'drive':
 		return "<iframe src=\"https://drive.google.com/file/d/" + c + "/preview?autoplay=1\" width='100%' height='100%' resizable=true id=streamo frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'twitch':
-		return "<iframe src=\"https://player.twitch.tv/?channel=" + c + "&muted=true\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return `<div id="twitch-player"></div><script type="text/javascript">var options = {width: "100%",height: "100%",channel: "`+ c +`"}; var player = new Twitch.Player("twitch-player", options); player.setVolume(0.0);</script>`;
 	case 'soundcloud':
 		return "<iframe src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + c + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\" width='100%' height='100%' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'hitbox':
