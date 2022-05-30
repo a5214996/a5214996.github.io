@@ -1,4 +1,4 @@
-﻿var channel = "spacespacespace";
+﻿var channel = "lal420";
 var stov = "modvideo";
 var stop = "modpoll";
 var wait = "";
