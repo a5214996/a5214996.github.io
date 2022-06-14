@@ -266,7 +266,7 @@ function GetPlayerEmbed(o, c) {
 	case 'telerium':
 		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
 	case 'dacast':
-		return `<div style="position:relative;padding-bottom:56.25%;overflow:hidden;height:0;max-width:100%;"><iframe id="0038d10f-ec8c-e727-5954-9fab96fa5322" src="https://iframe.dacast.com/live/53a41bd1-102f-a92d-5c6e-0250e8de100c/0038d10f-ec8c-e727-5954-9fab96fa5322" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay;encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen style="position:absolute;top:0;left:0;"></iframe></div>`;
+		return `<div style="position:relative;padding-bottom:56.25%;overflow:hidden;height:0;max-width:100%;"><iframe id="0038d10f-ec8c-e727-5954-9fab96fa5322" src="https://iframe.dacast.com/live/" + c + "width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay;encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen style="position:absolute;top:0;left:0;"></iframe></div>`;
 	case 'angel':
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
