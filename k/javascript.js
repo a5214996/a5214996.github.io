@@ -238,7 +238,7 @@ function GetPlayerEmbed(o, c) {
 	case 'drive':
 		return "<iframe src=\"https://drive.google.com/file/d/" + c + "/preview?autoplay=1\" width='100%' height='100%' resizable=true id=streamo frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'twitch':
-		return "<iframe src=\"https://player.twitch.tv/?channel=" + c + "&muted=true\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return `<div id="twitch-player"></div><script type="text/javascript">var options = {width: "100%",height: "100%",channel: "`+ c +`"}; var player = new Twitch.Player("twitch-player", options); player.setVolume(0.0);</script>`;
 	case 'soundcloud':
 		return "<iframe src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + c + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\" width='100%' height='100%' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'hitbox':
@@ -265,6 +265,8 @@ function GetPlayerEmbed(o, c) {
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'telerium':
 		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
+	case 'dacast':
+		return `<iframe id="0038d10f-ec8c-e727-5954-9fab96fa5322" src="https://iframe.dacast.com/live/` + c + `" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay;encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen style="position:absolute;top:0;left:0;"></iframe>`;
 	case 'angel':
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");

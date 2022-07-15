@@ -346,6 +346,10 @@ span.vidOptions{
   display:block;
 }
 
+.topnav img{
+  float:left;
+}
+
 /* Change the color of links on hover 
 .topnav a:hover {
   background-color: #ddd;
@@ -506,7 +510,7 @@ span#ps{
 }
 
 #\23 nav > a{
-	color:#FFC41A;
+	color:#FF9900;
 }
 
 #\23 nav > div.topnav-right > a:nth-child(1){
