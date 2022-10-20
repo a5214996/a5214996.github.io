@@ -229,6 +229,8 @@ function GetPlayerEmbed(o, c) {
 		return '<iframe src="https://www.ustream.tv/embed/' + c + '?html5ui&showtitle=false" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'youtube':
 		return '<iframe src="https://www.youtube.com/embed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+	case 'ok':
+		return '<iframe src="https://www.ok.ru/videoembed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'jwplayer':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'rtmp':
