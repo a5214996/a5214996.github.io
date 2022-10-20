@@ -5,7 +5,6 @@
 	margin: 0px;
 	padding: 0px;
 	border-width:0px;
-	
 }
 
  #main{
@@ -316,11 +315,9 @@ span.vidOptions{
 	background-size: 100% 1px;
 	background-repeat: no-repeat;
 	background-position: center bottom;
-	padding: 0 8px;
-    text-decoration: none;
     font-size: 18px;
-    color: #fff;
-
+    color:#fff;
+}
 
 .topnav *{
   background-color: #17141F;
@@ -344,11 +341,25 @@ span.vidOptions{
   text-align: center;
   padding: 0 8px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   color:#fff;
   text-decoration: none;
   vertical-align:center;
   display:block;
+}
+
+.topnav img{
+  float:left;
+}
+
+div#b{
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 0px;
+  font-size:14px;
 }
 
 /* Change the color of links on hover 
@@ -365,22 +376,6 @@ span.vidOptions{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-span.topnav-centered{
-	float: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0 8px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #fff;
-    text-decoration: none;
-    vertical-align: center;
-    display: block;
-}
-
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {
@@ -401,10 +396,6 @@ span.topnav-centered{
     left: 0;
     transform: none;
   }
-}
-
-#logo{
-	height: 45px;
 }
 
 .box {
@@ -436,12 +427,6 @@ span.topnav-centered{
   visibility: visible;
   opacity: 1;
 }
-
-a#b{
-color:#FFC41A !important;
-}
-
-
 
 .popup {
   font-family: Helvetica,Tahoma;
