@@ -381,7 +381,10 @@ div#b{
 .topnav-right {
   float: right;
   font-size: 18px;
-  -webkit-touch-callout: none; /* iOS Safari */
+}
+
+.noselect{
+ -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
        -moz-user-select: none; /* Old versions of Firefox */
