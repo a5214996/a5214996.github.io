@@ -382,7 +382,9 @@ div#b{
   float: right;
   font-size: 18px;
 }
-
+.fff{
+	font-color:#fff;
+}
 .noselect{
  -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
