@@ -420,6 +420,10 @@ span.vidOptions{
   opacity: 1;
 }
 
+a#b{
+color:#FFC41A;
+}
+
 .popup {
   font-family: Helvetica,Tahoma;
   font-size:10px;
