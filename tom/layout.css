@@ -346,10 +346,6 @@ span.vidOptions{
   display:block;
 }
 
-.topnav img{
-  float:left;
-}
-
 /* Change the color of links on hover 
 .topnav a:hover {
   background-color: #ddd;
@@ -364,6 +360,18 @@ span.vidOptions{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.topnav-left{
+    float: left;
+    padding: 0 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    vertical-align: center;
+    display: block;
+}
+
 
 /* Right-aligned section inside the top navigation */
 .topnav-right {
@@ -423,6 +431,8 @@ span.vidOptions{
 a#b{
 color:#FFC41A !important;
 }
+
+
 
 .popup {
   font-family: Helvetica,Tahoma;
