@@ -246,7 +246,7 @@ function GetPlayerEmbed(o, c) {
 	case 'vaughnlive':
 		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'castamp':
-		return '<iframe src=\"http://embed.castamp.com/' + c + '" resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+		return '<iframe src=\"https://embed.castamp.com/' + c + '" resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'dailymotion':
 		return '<iframe src="http://www.dailymotion.com/embed/video/' + c + '?api=postMessage&id=player&syndication=lr:166445&autoplay=1&info=0&logo=0&related=0&social=0&theme=light" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ssh':
