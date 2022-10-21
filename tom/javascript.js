@@ -221,8 +221,6 @@ function GetPlayerEmbed(o, c) {
 		return '<script>location.reload();</script>';
 	case 'offline':
 		return '<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">offline</h1>';
-	case 'streamify':
-		return '<iframe src="http://www.streamifyplayer.com/embedplayer/' + c + '/1/' + w + '/' + h + '" width=' + w + ' height=' + h + ' scrolling=no marginwidth="0" marginheight="0" resizable=true id=stream frameborder=0 allowtransparency=true allowfullscreen></iframe>';
 	case 'ustream':
 		return '<iframe src="https://www.ustream.tv/embed/' + c + '?html5ui&showtitle=false" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'youtube':
@@ -244,17 +242,13 @@ function GetPlayerEmbed(o, c) {
 	case 'dot':
 		return '<iframe src=\"http://dotstream.tv/player.php?streampage=' + c + '&width=' + w + '&height=' + h + '\"  width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'vaughnlive':
-		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=true frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'castamp':
-		return '<iframe src=\"https://embed.castamp.com/' + c + '" resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+		return '<iframe src=\"https://embed.castamp.com/' + c + '" width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'dailymotion':
 		return '<iframe src="http://www.dailymotion.com/embed/video/' + c + '?api=postMessage&id=player&syndication=lr:166445&autoplay=1&info=0&logo=0&related=0&social=0&theme=light" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ssh':
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'telerium':
-		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
-	case 'dacast':
-		return `<iframe id="0038d10f-ec8c-e727-5954-9fab96fa5322" src="https://iframe.dacast.com/live/` + c + `" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay;encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen style="position:absolute;top:0;left:0;"></iframe>`;
 	case 'angel':
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
