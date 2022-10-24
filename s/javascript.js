@@ -221,14 +221,12 @@ function GetPlayerEmbed(o, c) {
 		return '<script>location.reload();</script>';
 	case 'offline':
 		return '<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">offline</h1>';
-	case 'streamify':
-		return '<iframe src="http://www.streamifyplayer.com/embedplayer/' + c + '/1/' + w + '/' + h + '" width=' + w + ' height=' + h + ' scrolling=no marginwidth="0" marginheight="0" resizable=true id=stream frameborder=0 allowtransparency=true allowfullscreen></iframe>';
-	case 'broadcast':
-		return '<iframe src=\"http://bro.adcast.tech/stream.php?id=' + c + '&width=' + w + '&height=' + h + '\" width=' + w + ' height=' + h + ' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ustream':
 		return '<iframe src="https://www.ustream.tv/embed/' + c + '?html5ui&showtitle=false" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'youtube':
 		return '<iframe src="https://www.youtube.com/embed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+	case 'ok':
+		return '<iframe src="https://www.ok.ru/videoembed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'jwplayer':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'rtmp':
@@ -241,32 +239,16 @@ function GetPlayerEmbed(o, c) {
 		return `<div id="twitch-player"></div><script type="text/javascript">var options = {width: "100%",height: "100%",channel: "`+ c +`"}; var player = new Twitch.Player("twitch-player", options); player.setVolume(0.0);</script>`;
 	case 'soundcloud':
 		return "<iframe src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + c + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\" width='100%' height='100%' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	case 'hitbox':
-		return "<iframe src=\"https://www.hitbox.tv/embed/" + c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	case 'vidi':
-		return "<iframe src=\"http://vidi.tv/embed-player/" + c + "\" width='100%' height='100%' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'dot':
 		return '<iframe src=\"http://dotstream.tv/player.php?streampage=' + c + '&width=' + w + '&height=' + h + '\"  width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'sawlive':
-		return "<iframe src='saw.html' scrolling=no id=stream allowfullscreen></iframe>"
-	case 'iguide':
-		return '<iframe src=\"http://www.iguide.to/embedplayer_new.php?width=' + w + '&height=' + h + '&c=' + c + '&autoplay=true\" width=' + w + ' height=' + h + ' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'vaughnlive':
-		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=true frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'castamp':
-		return '<iframe src=\"http://www.castamp.com/embed.php?c=' + c + '&tk=01234567&vwidth=' + w + '&vheight=' + h + '\" width=' + w + ' height=' + h + ' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'streamup':
-		return '<iframe src="http://www.streamup.com/' + c + '/embeds/video" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>'
-	case 'widestream':
-		return '<iframe src=\"http://www.widestream.io/embed-' + c +  ' \" width=' + w + ' height=' + h + ' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+		return '<iframe src=\"https://embed.castamp.com/' + c + '" width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'dailymotion':
 		return '<iframe src="http://www.dailymotion.com/embed/video/' + c + '?api=postMessage&id=player&syndication=lr:166445&autoplay=1&info=0&logo=0&related=0&social=0&theme=light" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ssh':
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'telerium':
-		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
-	case 'dacast':
-		return `<iframe id="0038d10f-ec8c-e727-5954-9fab96fa5322" src="https://iframe.dacast.com/live/` + c + `" width="100%" height="100%" frameborder="0" scrolling="no" allow="autoplay;encrypted-media" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen style="position:absolute;top:0;left:0;"></iframe>`;
 	case 'angel':
 			$('#ps').before("<hr/>");
 			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
