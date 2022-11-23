@@ -17,21 +17,29 @@ function handleVisibilityChange() {
 }
 
 function updateVideo() {
-    $.ajax({
-        url: "video.json?" + Date.now(),
-        type: "GET",
-        dataType: "json",
-        success: function(responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success") {
-                SetPlayer(responseTxt.host, responseTxt.channel);
-                sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
-            }
-        },
-        error: function(xhr, status, error) {
-            var err = eval("(" + xhr.responseText + ")");
-            alert(err.Message);
-        }
-    })
+	const parsedHash = new URLSearchParams(
+		window.location.hash.substring(1) // skip the first char (#)
+	);
+	
+	if(parsedHash){
+	    console.log(parsedHash.get("any_hash_key")); // any_value
+	}else{
+		$.ajax({
+			url: "video.json?" + Date.now(),
+			type: "GET",
+			dataType: "json",
+			success: function(responseTxt, statusTxt, xhr) {
+				if (statusTxt == "success") {
+					SetPlayer(responseTxt.host, responseTxt.channel);
+					sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
+				}
+			},
+			error: function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				alert(err.Message);
+			}
+		})
+	}
 }
 
 
