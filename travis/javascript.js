@@ -171,12 +171,13 @@ function getRes(o){
 	
 	var w = Math.floor(window.innerWidth)-s;
 	var h = Math.floor(w * .5625);
+
     var r = (window.innerHeight - $('#nav').height()) / (w);
 	//console.log("w:" + w + " | h: " + h + " | r:" + r);
-	
+	/*
 	//limit by height
 	if(r < .5625){
-		console.log("if");
+		//console.log("if");
 		h = Math.floor(window.innerHeight)-50;
 		w = Math.floor(h / .5625)
 		$(".video-container").css("width",w+"px");
@@ -199,7 +200,7 @@ function getRes(o){
 		$(".video-container").css("-o-transform","translateY(-50%)");
 		$(".video-container").css("transform","translateY(-50%)");
 	}
-		
+*/
 	//console.log(w + " " + h);
 	res["w"] = w;
 	res["h"] = h;
@@ -250,8 +251,6 @@ function GetPlayerEmbed(o, c) {
 	case 'ssh':
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'angel':
-			$('#ps').before("<hr/>");
-			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://player.angelthump.com/?channel="+ c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 			return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
