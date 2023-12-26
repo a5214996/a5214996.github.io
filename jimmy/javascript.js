@@ -17,29 +17,21 @@ function handleVisibilityChange() {
 }
 
 function updateVideo() {
-	const parsedHash = new URLSearchParams(
-		window.location.hash.substring(1) // skip the first char (#)
-	);
-	
-	if(parsedHash){
-	    console.log(parsedHash.get("any_hash_key")); // any_value
-	}else{
-		$.ajax({
-			url: "video.json?" + Date.now(),
-			type: "GET",
-			dataType: "json",
-			success: function(responseTxt, statusTxt, xhr) {
-				if (statusTxt == "success") {
-					SetPlayer(responseTxt.host, responseTxt.channel);
-					sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
-				}
-			},
-			error: function(xhr, status, error) {
-				var err = eval("(" + xhr.responseText + ")");
-				alert(err.Message);
-			}
-		})
-	}
+    $.ajax({
+        url: "video.json?" + Date.now(),
+        type: "GET",
+        dataType: "json",
+        success: function(responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                SetPlayer(responseTxt.host, responseTxt.channel);
+                sessionStorage.setItem(stov, xhr.getResponseHeader("Last-Modified"));
+            }
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(err.Message);
+        }
+    })
 }
 
 
@@ -179,12 +171,13 @@ function getRes(o){
 	
 	var w = Math.floor(window.innerWidth)-s;
 	var h = Math.floor(w * .5625);
+
     var r = (window.innerHeight - $('#nav').height()) / (w);
 	//console.log("w:" + w + " | h: " + h + " | r:" + r);
-	
+	/*
 	//limit by height
 	if(r < .5625){
-		console.log("if");
+		//console.log("if");
 		h = Math.floor(window.innerHeight)-50;
 		w = Math.floor(h / .5625)
 		$(".video-container").css("width",w+"px");
@@ -207,7 +200,7 @@ function getRes(o){
 		$(".video-container").css("-o-transform","translateY(-50%)");
 		$(".video-container").css("transform","translateY(-50%)");
 	}
-		
+*/
 	//console.log(w + " " + h);
 	res["w"] = w;
 	res["h"] = h;
@@ -234,13 +227,13 @@ function GetPlayerEmbed(o, c) {
 	case 'youtube':
 		return '<iframe src="https://www.youtube.com/embed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ok':
-		return '<iframe src="https://www.ok.ru/videoembed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+		return '<iframe src=//ok.ru/videoembed/' + c + '?autoplay=1 width=100% height=100% allow=autoplay resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'jwplayer':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'rtmp':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,type:"rtmp",rtmp: {bufferlength:3,},file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'clappr':
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [DashShakaPlayback, QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	case 'drive':
 		return "<iframe src=\"https://drive.google.com/file/d/" + c + "/preview?autoplay=1\" width='100%' height='100%' resizable=true id=streamo frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'twitch':
@@ -258,8 +251,6 @@ function GetPlayerEmbed(o, c) {
 	case 'ssh':
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'angel':
-			$('#ps').before("<hr/>");
-			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://player.angelthump.com/?channel="+ c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 			return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
