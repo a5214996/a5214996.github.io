@@ -266,6 +266,8 @@ function GetPlayerEmbed(o, c) {
 	case 'telerium':
 		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
 	case 'angel':
+			$('#ps').before("<hr/>");
+			$('#ps').text("The Patreon link is not associated with Hot Dudes.");
             return "<iframe src=\"https://player.angelthump.com/?channel="+ c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 			return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
@@ -274,11 +276,13 @@ function GetPlayerEmbed(o, c) {
 			<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>US East 2</b></a> |
 			<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a><br/>
 			<a href="#" onclick="updateServer('eu1');return false;" style="font-size:30px;color:#FFF"><b>EU 1</b></a> |
-			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2</b></a> |
+			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2 </b></a> |
 			<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>EU 3</b></a> |
 			<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>RU</b></a> |
 			<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/>
 			<span style="font-size:20px">Try a different server if you're lagging</span></h1>
+			
+			<!--<a href="https://www.patreon.com/join/angelthump" target="_blank"><img src="https://i.imgur.com/GXERebi.png" alt="Angelthump"></a>--></h1>`;
 	}	
 }
 
@@ -308,28 +312,28 @@ function setServer(o, c, s) {
 	if(o == "angels"){
 		switch(s){
 			case 'w':
-				c = c.replace("#", "sfo");
+				c = c.replace("#", "sfo1");
 				break;
 			case 'e1':
-				c = c.replace("#", "tor");
+				c = c.replace("#", "tor1");
 				break;
 			case 'e2':
-				c = c.replace("#", "nyc");
+				c = c.replace("#", "nyc1");
 				break;
 			case 'eu1':
-				c = c.replace("#", "lon");
+				c = c.replace("#", "lon1");
 				break;
 			case 'eu2':
-				c = c.replace("#", "fra");
+				c = c.replace("#", "fra1");
 				break;
-			case 'eu':
-				c = c.replace("#", "ams");
+			case 'eu3':
+				c = c.replace("#", "ams1");
 				break;
 			case 'ru':
-				c = c.replace("#", "blr");
+				c = c.replace("#", "blr1");
 				break;
 			case 'sea':
-				c = c.replace("#", "sgp");
+				c = c.replace("#", "sgp1");
 				break;
 		}
 		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: ${h}, width: "100%"});</script>`;
