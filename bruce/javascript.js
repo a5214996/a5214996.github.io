@@ -317,7 +317,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "nyc1");
 				break;
 			case 'eu1':
-				c = c.replace("#", "lon"1);
+				c = c.replace("#", "lon1");
 				break;
 			case 'eu2':
 				c = c.replace("#", "fra1");
