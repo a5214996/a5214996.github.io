@@ -320,7 +320,7 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sgp1");
 				break;
 		}
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [DashShakaPlayback, QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, parentId: "#player", height: "100%", width: "100%"});</script>`;
 	}
 }
 
