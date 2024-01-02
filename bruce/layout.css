@@ -315,6 +315,8 @@ span.vidOptions{
 	background-size: 100% 1px;
 	background-repeat: no-repeat;
 	background-position: center bottom;
+    font-size: 18px;
+    color:#FFC41A;
 }
 
 .topnav *{
@@ -350,6 +352,16 @@ span.vidOptions{
   float:left;
 }
 
+div#b{
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 162px);
+  transform: translate(-50%, -50%);
+  line-height: 0px;
+  font-size:14px;
+}
+
 /* Change the color of links on hover 
 .topnav a:hover {
   background-color: #ddd;
@@ -368,7 +380,19 @@ span.vidOptions{
 /* Right-aligned section inside the top navigation */
 .topnav-right {
   float: right;
-  font-size: 16px;
+  font-size: 18px;
+}
+.fff{
+	font-color:#fff;
+}
+.noselect{
+ -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 /* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
@@ -385,8 +409,6 @@ span.vidOptions{
     transform: none;
   }
 }
-
-
 
 .box {
   width: 40%;
