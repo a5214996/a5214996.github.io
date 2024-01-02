@@ -278,7 +278,7 @@ function GetPlayerEmbed(o, c) {
 			<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>EU 3</b></a> |
 			<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>RU</b></a> |
 			<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/>
-			<span style="font-size:20px">Try a different server if you're lagging</span></h1>
+			<span style="font-size:20px">Try a different server if you're lagging</span></h1>`
 	}	
 }
 
