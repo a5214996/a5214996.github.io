@@ -171,12 +171,13 @@ function getRes(o){
 	
 	var w = Math.floor(window.innerWidth)-s;
 	var h = Math.floor(w * .5625);
+
     var r = (window.innerHeight - $('#nav').height()) / (w);
 	//console.log("w:" + w + " | h: " + h + " | r:" + r);
-	
+	/*
 	//limit by height
 	if(r < .5625){
-		console.log("if");
+		//console.log("if");
 		h = Math.floor(window.innerHeight)-50;
 		w = Math.floor(h / .5625)
 		$(".video-container").css("width",w+"px");
@@ -199,7 +200,7 @@ function getRes(o){
 		$(".video-container").css("-o-transform","translateY(-50%)");
 		$(".video-container").css("transform","translateY(-50%)");
 	}
-		
+*/
 	//console.log(w + " " + h);
 	res["w"] = w;
 	res["h"] = h;
@@ -221,61 +222,50 @@ function GetPlayerEmbed(o, c) {
 		return '<script>location.reload();</script>';
 	case 'offline':
 		return '<h1 style="font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">offline</h1>';
-	case 'streamify':
-		return '<iframe src="http://www.streamifyplayer.com/embedplayer/' + c + '/1/' + w + '/' + h + '" width=' + w + ' height=' + h + ' scrolling=no marginwidth="0" marginheight="0" resizable=true id=stream frameborder=0 allowtransparency=true allowfullscreen></iframe>';
-	case 'broadcast':
-		return '<iframe src=\"http://bro.adcast.tech/stream.php?id=' + c + '&width=' + w + '&height=' + h + '\" width=' + w + ' height=' + h + ' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ustream':
 		return '<iframe src="https://www.ustream.tv/embed/' + c + '?html5ui&showtitle=false" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'youtube':
 		return '<iframe src="https://www.youtube.com/embed/' + c + '?autoplay=1" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+	case 'ok':
+		return '<iframe src=//ok.ru/videoembed/' + c + '?autoplay=1 width=100% height=100% allow=autoplay resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'jwplayer':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'rtmp':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,type:"rtmp",rtmp: {bufferlength:3,},file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'clappr':
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [DashShakaPlayback, QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	case 'drive':
 		return "<iframe src=\"https://drive.google.com/file/d/" + c + "/preview?autoplay=1\" width='100%' height='100%' resizable=true id=streamo frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'twitch':
-		return "<iframe src=\"https://player.twitch.tv/?channel=" + c + "&muted=true\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return `<div id="twitch-player"></div><script type="text/javascript">var options = {width: "100%",height: "100%",channel: "`+ c +`"}; var player = new Twitch.Player("twitch-player", options); player.setVolume(0.0);</script>`;
 	case 'soundcloud':
 		return "<iframe src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + c + "&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true\" width='100%' height='100%' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	case 'hitbox':
-		return "<iframe src=\"https://www.hitbox.tv/embed/" + c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
-	case 'vidi':
-		return "<iframe src=\"http://vidi.tv/embed-player/" + c + "\" width='100%' height='100%' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'dot':
 		return '<iframe src=\"http://dotstream.tv/player.php?streampage=' + c + '&width=' + w + '&height=' + h + '\"  width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'sawlive':
-		return "<iframe src='saw.html' scrolling=no id=stream allowfullscreen></iframe>"
-	case 'iguide':
-		return '<iframe src=\"http://www.iguide.to/embedplayer_new.php?width=' + w + '&height=' + h + '&c=' + c + '&autoplay=true\" width=' + w + ' height=' + h + ' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'vaughnlive':
-		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
+		return "<iframe src=\"http://www.vaughnlive.tv/embed/video/" + c + "\" width='100%' height='100%' resizable=true frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'castamp':
-		return '<iframe src=\"http://www.castamp.com/embed.php?c=' + c + '&tk=01234567&vwidth=' + w + '&vheight=' + h + '\" width=' + w + ' height=' + h + ' resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'streamup':
-		return '<iframe src="http://www.streamup.com/' + c + '/embeds/video" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>'
-	case 'widestream':
-		return '<iframe src=\"http://www.widestream.io/embed-' + c +  ' \" width=' + w + ' height=' + h + ' resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+		return '<iframe src=\"https://embed.castamp.com/' + c + '" width=100% height=100% resizable=true id=stream scrolling=no frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'dailymotion':
 		return '<iframe src="http://www.dailymotion.com/embed/video/' + c + '?api=postMessage&id=player&syndication=lr:166445&autoplay=1&info=0&logo=0&related=0&social=0&theme=light" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'ssh':
 		return '<iframe src="https://www.ssh101.com/securelive/index.php?id=' + c + '" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
-	case 'telerium':
-		return `<iframe src=\"https://telerium.tv/embed/" + c + ".html\" width='100%' height='100%' resizable=\"true\" frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>`;
 	case 'angel':
             return "<iframe src=\"https://player.angelthump.com/?channel="+ c + "\" width='100%' height='100%' resizable=true id=stream  frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'angels':
 			return `<h1 style="font-size:40px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">
 			Select a server:<br/>
-			<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>US East</b></a> |
+			<a href="#" onclick="updateServer('e1');return false;" style="font-size:30px;color:#FFF"><b>US East 1</b></a> |
+			<a href="#" onclick="updateServer('e2');return false;" style="font-size:30px;color:#FFF"><b>US East 2</b></a> |
 			<a href="#" onclick="updateServer('w');return false;" style="font-size:30px;color:#FFF"><b>US West</b></a><br/>
 			<a href="#" onclick="updateServer('eu1');return false;" style="font-size:30px;color:#FFF"><b>EU 1</b></a> |
-			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2</b></a> |
+			<a href="#" onclick="updateServer('eu2');return false;" style="font-size:30px;color:#FFF"><b>EU 2 </b></a> |
+			<a href="#" onclick="updateServer('eu3');return false;" style="font-size:30px;color:#FFF"><b>EU 3</b></a> |
+			<a href="#" onclick="updateServer('ru');return false;" style="font-size:30px;color:#FFF"><b>RU</b></a> |
 			<a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/>
-			<span style="font-size:20px">Try a different server if you're lagging</span></h1>`
+			<span style="font-size:20px">Try a different server if you're lagging</span></h1>
+			
+			<!--<a href="https://www.patreon.com/join/angelthump" target="_blank"><img src="https://i.imgur.com/GXERebi.png" alt="Angelthump"></a>--></h1>`;
 	}	
 }
 
@@ -308,13 +298,22 @@ function setServer(o, c, s) {
 				c = c.replace("#", "sfo1");
 				break;
 			case 'e1':
+				c = c.replace("#", "tor1");
+				break;
+			case 'e2':
 				c = c.replace("#", "nyc1");
 				break;
 			case 'eu1':
-				c = c.replace("#", "fra1");
+				c = c.replace("#", "lon1");
 				break;
 			case 'eu2':
+				c = c.replace("#", "fra1");
+				break;
+			case 'eu3':
 				c = c.replace("#", "ams1");
+				break;
+			case 'ru':
+				c = c.replace("#", "blr1");
 				break;
 			case 'sea':
 				c = c.replace("#", "sgp1");
