@@ -234,7 +234,7 @@ function GetPlayerEmbed(o, c) {
 	case 'rtmp':
 		return '<script type="text/javascript">jwplayer.key="IFe5rS/dnOPqPbx0UE+Z83SFW53jfYkODVyjpGb7ErU=";</script><div id="jw">Loading the player ...</div><script type="text/javascript">jwplayer("jw").setup({primary: "flash", height: "100%",width: "100%",autostart: true,type:"rtmp",rtmp: {bufferlength:3,},file: "' + c + '",analytics: {enabled: false,cookies: false},});</script>';
 	case 'clappr':
-		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [DashShakaPlayback, QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
+		return `<div id="player"></div><script>var player = new Clappr.Player({source: "${c}", mute: true, autoPlay: true, poster: "https://i.imgur.com/RXEEHkO.png", plugins: [QualitySelector], parentId: "#player", height: ${h}, width: "100%"});</script>`;
 	case 'drive':
 		return "<iframe src=\"https://drive.google.com/file/d/" + c + "/preview?autoplay=1\" width='100%' height='100%' resizable=true id=streamo frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>";
 	case 'twitch':
