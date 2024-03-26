@@ -1,0 +1,28 @@
+<style>
+	body{
+	margin:0;
+	padding:0;
+	overflow:hidden; 
+	}
+</style>
+<script type="text/javascript" src="../dist/jwplayer.js"></script>
+<script type="text/javascript">jwplayer.key="b81IZfN/fOh7vWpmja1lnyuKsKuFcTjsNiVfqg==";</script>
+<div id="jw">Loading the player ...</div>
+<script type="text/javascript">
+	jwplayer("jw").setup({
+	width: '100%',
+	aspectratio:'16:9',
+	stretching: "exactfit",
+	autostart: false,
+	type: 'rtmp',
+	file: 'rtmp://sea1a-border.stream.me/live/sea1a~1~287e576c-d9b2-40e8-b090-5b502537b60e?overrideCdnDomain=sea1a-edge.stream.me&protocol=https',
+	rtmp: {
+		bufferlength: 3,
+	},
+	analytics: {
+		enabled: false,
+		cookies: false
+	},
+});
+jwplayer()["onSetupError"](function() {window["location"] = "error.html"})
+</script>
