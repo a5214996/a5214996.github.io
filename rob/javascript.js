@@ -214,9 +214,10 @@ function GetPlayerEmbed(o, c) {
 	
      if(c.indexOf("1-edge") > -1)
           c = updateC(c);
+
      if (o == "offline")
           document.getElementById("b").style.display = "none";
-
+     console.log(o);
 	switch (o) {
 	case 'warning':
 		return '<h1 style="font-family: Helvetica,Tahoma;font-size:36px;text-align:center;position:absolute;top:50%;left:50%;margin-right:-50%;transform:translate(-50%, -50%);color:white;">PLEASE DO NOT SHARE<br/><br/><a href="https://www.ublock.org" style="color:#FB2" target="_blank">USE ADBLOCK</a>. We receive ZERO REVENUE from ads<br/><br/><a href="#" onclick="updateVideo();return false;" style="font-size:50px;color:#FB2"><b>OK</b></a></h1>';
