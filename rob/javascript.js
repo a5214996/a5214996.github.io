@@ -214,10 +214,8 @@ function GetPlayerEmbed(o, c) {
 	
      if(c.indexOf("1-edge") > -1)
           c = updateC(c);
-     }
-     if (o == "offline") {
+     if (o == "offline")
           document.getElementById("b").style.display = "none";
-     }
 
 	switch (o) {
 	case 'warning':
