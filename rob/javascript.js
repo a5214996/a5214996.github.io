@@ -223,7 +223,7 @@ function GetPlayerEmbed(o, c) {
 	case 'refresh':
 		return '<script>location.reload();</script>';
 	case 'offline':
-		return '<div><a href="https://discord.gg/quackpack" target="_blank"><img src="discord.png" style="height:32px"></a></div>';
+		return '<div id=o><a href="https://discord.gg/quackpack" target="_blank"><img src="discord.png" style="height:32px"></a></div>';
 	case 'ustream':
 		return '<iframe src="https://www.ustream.tv/embed/' + c + '?html5ui&showtitle=false" width=100% height=100% resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
 	case 'youtube':
