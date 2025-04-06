@@ -362,6 +362,17 @@ div#b{
   font-size:14px;
 }
 
+div#o{
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 0px;
+  font-size:14px;
+}	
+}
+
 /* Change the color of links on hover 
 .topnav a:hover {
   background-color: #ddd;
