@@ -1,4 +1,6 @@
-@media screen and (max-width: 768px) and (orientation: portrait) {
+@import url("//fonts.googleapis.com/css?family=Knewave");
+
+@media screen and (orientation: portrait) {
   html, body {
     margin: 0;
     padding: 0;
@@ -14,15 +16,22 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: auto; /* Auto height to accommodate the stacked elements */
     background-color: #17141F;
     color: #FFC41A;
     z-index: 1000;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
+    flex-direction: column; /* Stack the content vertically in mobile */
+    align-items: center; /* Center-align items */
+    padding: 10px;
     font-family: 'Knewave', cursive;
+  }
+
+  .topnav-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 10px; /* Add spacing between the discord link and the right items */
   }
 
   .topnav a {
