@@ -62,7 +62,16 @@ html, body {
 	overflow: hidden !important;
 }
 
-.topnav {
+#nav{
+	background-image: linear-gradient(to right,
+	hsla(175,70%,40%,1) 16.666667%, hsla(150,70%,40%,1) 16.666667%,
+	hsla(150,70%,40%,1) 33.333333%, hsla(75,70%,40%,1) 33.333333%,
+	hsla(75,70%,40%,1) 50%, hsla(25,70%,40%,1) 50%,
+	hsla(25,70%,40%,1) 66.666667%, hsla(10,70%,40%,1) 66.666667%,
+	hsla(10,70%,40%,1) 83.333333%, hsla(300,70%,40%,1) 83.333333%);
+	background-size: 100% 1px;
+	background-repeat: no-repeat;
+	background-position: center bottom;
 	overflow: hidden;
 	background-color: #17141F;
 	position: relative;
@@ -72,23 +81,10 @@ html, body {
 	height: 50px;
 	line-height: 50px;
 	margin-top: -1px;
-	background-image: linear-gradient(to right,
-		hsla(175,70%,40%,1) 16.666667%, hsla(150,70%,40%,1) 16.666667%,
-		hsla(150,70%,40%,1) 33.333333%, hsla(75,70%,40%,1) 33.333333%,
-		hsla(75,70%,40%,1) 50%, hsla(25,70%,40%,1) 50%,
-		hsla(25,70%,40%,1) 66.666667%, hsla(10,70%,40%,1) 66.666667%,
-		hsla(10,70%,40%,1) 83.333333%, hsla(300,70%,40%,1) 83.333333%);
-	background-size: 100% 1px;
-	background-repeat: no-repeat;
-	background-position: center bottom;
 	font-size: 18px;
 	color: #FFC41A;
-}
-
-.topnav * {
 	background-color: #17141F;
 	font-family: 'Knewave', cursive;
-	transition: all .2s ease;
 }
 
 .topnav a {
