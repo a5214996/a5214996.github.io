@@ -193,13 +193,15 @@ function SetChat() {
 }
 
 function GetChatEmbed(channel, mode) {
-  if (mode === "hide") return "";
-  const styles = mode === "night"
-    ? {"a":"000000","d":"FFFFFF","g":"444444"}
-    : {"a":"3c2569","d":"FFFFFF","g":"000000"};
-  return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">
-    {"handle":"${channel}","arch":"js","styles":${JSON.stringify(styles)}}
-  </script>`;
+    switch (mode) {
+        case 'night':
+            return '<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">{"handle":"' + channel + '","arch":"js","styles":{"a":"000000","b":100,"c":"444444","d":"FFFFFF","e":"000000","f":100,"g":"444444","h":"000000","i":100,"j":"444444","k":"444444","l":"000000","m":"444444","n":"444444","p":11,"q":"000000","r":0,"t":0,"v":0,"ab":1,"sbc":"444444","sba":100,"surl":0,"allowpm":1,"v":0,"w":0,"showhdr":0,"showx":0}}</script>';
+		/*return '<iframe src="https://www.twitch.tv/lal420/chat?darkpopout=" frameborder="0" scrolling="no" height="100%" width="100%"></iframe>'*/
+        case 'day':
+            return '<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">{"handle":"' + channel + '","arch":"js","styles":{"a":"3c2569","b":100,"c":"FFFFFF","d":"FFFFFF","e":"FFFFFF","f":100,"g":"000000","h":"FFFFFF","i":100,"j":"000000","k":"000000","l":"3c2569","m":"FFFFFF","n":"FFFFFF","p":11,"q":"000000","r":0,"t":0,"v":0,"ab":0,"sbc":"3c2569","sba":100,"surl":0,"allowpm":1,"v":0,"w":0,"showhdr":0,"showx":0}}</script>';
+        case 'hide':
+            return ''
+    }
 }
 
 $(document).ready(() => {
