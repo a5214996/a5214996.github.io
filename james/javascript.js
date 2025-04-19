@@ -96,7 +96,9 @@ function getPlayerEmbed(host, channel) {
           channel: "${channel}"
         }).setVolume(0.0);
       </script>`;
-    case "angels":
+   case "angel":
+      return `<iframe src="https://player.angelthump.com/?channel=${channel}" width="100%" height="100%" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
+   case "angels":
       return getServerSelectionEmbed();
     default:
       return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
