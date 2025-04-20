@@ -181,6 +181,16 @@ function setChat() {
   $('#chat-container').html(getChatEmbed(channel, mode));
 }
 
+function hideChat() {
+	const isVisible = $('#side').toggle().is(":visible");
+	
+	$("#chatvo").text(isVisible ? "hide chat" : "show chat");
+	$("#main").css("width", isVisible ? "calc(100% - 283px)" : "100%");
+
+	SetChat();
+	updateVideo();
+}
+
 function getChatEmbed(channel, mode) {
   if (mode === 'night') {
     return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">` +
