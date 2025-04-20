@@ -191,6 +191,11 @@ function hideChat() {
 	updateVideo();
 }
 
+function popoutChat() {
+    window.open("/chat", "_blank");
+    if ($("#side").is(":visible")) hideChat();
+}
+
 function getChatEmbed(channel, mode) {
   if (mode === 'night') {
     return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">` +
