@@ -56,11 +56,12 @@ html, body {
     position: relative;
   }
   
-  .video-container:not(:hover) .banner {
-   opacity: 0;
+  .video-container:hover .banner {
+   opacity: 100;
   }
 
   .banner{
+    opacity: 0;
   	display:block;
 	position: absolute;
 	top: 0;
