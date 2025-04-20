@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Do not share</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, noarchive">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    
+    <link href="/favicon.ico" rel="shortcut icon">
+	<link rel="stylesheet" href="mobile.css?v.02" media="screen and (max-width: 1023px)">
+	<link rel="stylesheet" href="desktop.css?v.02" media="screen and (min-width: 1024px)">
+</head>
+<body>
+    <div id="nav" class="topnav">
+        <div id="b">
+            <span class="noselect fff">
+                <a href="https://discord.gg/quackpack" target="_blank">
+                    <img src="discord.png" style="height:32px" alt="Discord">
+                </a>
+            </span>
+        </div>
+
+        <div class="topnav-right noselect">
+            <a href="javascript:void(0);" onclick="refreshVideo();">refresh video</a>
+            <a href="/chat" target="_blank">popout chat</a>
+            <a href="javascript:void(0);" onclick="hideChat();"><span id="chatvo">hide chat</span></a>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="main">
+            <div class="video-container" style="width: 100%; height: 100%">
+                <div id="video-wrapper"></div>
+            </div>
+        </div>
+        <div id="side">
+            <div id="chat-container" name="chat-container">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/clappr/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/ewwink/clappr-quality-selector-plugin@latest/quality-selector.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+    <script type="text/javascript" src="javascript.js?229"></script>
+</body>
+</html>
