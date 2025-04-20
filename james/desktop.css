@@ -18,13 +18,11 @@ html, body {
 #content {
 	display: flex;
 	width: 100%;
-	height: calc(100% - 50px);
-	background-color: #000;
+	height: calc(100% - 49px);
 }
 
 #main {
 	flex: 1;
-	background-color: #000;
 	height: 100%;
 	transform-style: preserve-3d;
 }
@@ -37,7 +35,7 @@ html, body {
 #chat-container {
 	position: absolute;
 	width: 345px;
-	top: 51px;
+	top: 49px;
 	right: -5px;
 	bottom: 0;
 	height: auto;
