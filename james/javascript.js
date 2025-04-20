@@ -29,18 +29,6 @@ function updateVideo() {
   });
 }
 
-function toggleChat() {
-  const $side = $('#side');
-  const isVisible = $side.is(":visible");
-
-  $side.toggle();
-  $("#chatvo").text(isVisible ? "show chat" : "hide chat");
-
-  const sideWidth = isVisible ? $side.width() : 0;
-
-  setChat();
-}
-
 function checkForVideoUpdate() {
   $.ajax({
     url: `video.json?${Date.now()}`,
@@ -184,10 +172,8 @@ function setChat() {
 function toggleChat() {
   const isVisible = $('#side').toggle().is(":visible");
   $("#chatvo").html(isVisible ? "hide chat" : "show chat");
-  $("#main").css("width", isVisible ? "calc(100% - 283px)" : "100%");
-  
+
   setChat();
-  updateVideo();
 }
 
 function popoutChat() {
