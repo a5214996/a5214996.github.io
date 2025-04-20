@@ -52,32 +52,21 @@ html, body {
 
   .video-container {
     width: 100%;
-	height:100%
+	height:100%;
     position: relative;
   }
+  
+  .video-container:not(:hover) .banner {
+   opacity: 0;
+  }
 
-.video-container:hover .banner {
-  opacity: 1;
-  visibility: visible;
-}
-
-.banner{
-	visibility: hidden;
-	display:block;
+  .banner{
+  	display:block;
 	position: absolute;
 	top: 0;
 	right:0;
     z-index: 1000;
-    transition: opacity 1s ease-out, visibility 0.5s 0s;
-}
-
-.video-container iframe,
-#jw_wrapper, .jwplayer {
-	position: absolute !important;
-	top: 0 !important;
-	left: 0 !important;
-	overflow: hidden !important;
-}
+  }
 
 #nav{
 	background-image: linear-gradient(to right,
@@ -135,4 +124,12 @@ html, body {
 
 .noselect {
 	user-select: none;
+}
+
+.video-container iframe,
+#jw_wrapper, .jwplayer {
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
+	overflow: hidden !important;
 }
