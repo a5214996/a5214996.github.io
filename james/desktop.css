@@ -56,6 +56,20 @@ html, body {
     position: relative;
   }
 
+.video-container:hover .banner {
+  opacity: 1;
+  visibility: visible;
+}
+
+.banner{
+	visibility: hidden;
+	display:block;
+	position: absolute;
+	top: 0;
+	right:0;
+    z-index: 1000;
+    transition: opacity 1s ease-out, visibility 0.2s 0s;
+}
 
 .video-container iframe,
 #jw_wrapper, .jwplayer {
@@ -101,7 +115,7 @@ html, body {
 }
 
 .topnav img {
-	float: left;
+	height: 32px;
 }
 
 .topnav-right {

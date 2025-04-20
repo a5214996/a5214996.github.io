@@ -29,7 +29,17 @@
     display: block;
   }
   
-
+#nav{
+	background-image: linear-gradient(to right,
+	hsla(175,70%,40%,1) 16.666667%, hsla(150,70%,40%,1) 16.666667%,
+	hsla(150,70%,40%,1) 33.333333%, hsla(75,70%,40%,1) 33.333333%,
+	hsla(75,70%,40%,1) 50%, hsla(25,70%,40%,1) 50%,
+	hsla(25,70%,40%,1) 66.666667%, hsla(10,70%,40%,1) 66.666667%,
+	hsla(10,70%,40%,1) 83.333333%, hsla(300,70%,40%,1) 83.333333%);
+	background-size: 100% 1px;
+	background-repeat: no-repeat;
+    background-position: center bottom;
+}
   #content {
     position: absolute;
     top: 50px;
