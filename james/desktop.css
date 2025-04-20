@@ -68,7 +68,7 @@ html, body {
 	top: 0;
 	right:0;
     z-index: 1000;
-    transition: opacity 1s ease-out, visibility 0.2s 0s;
+    transition: opacity 1s ease-out, visibility 0.5s 0s;
 }
 
 .video-container iframe,

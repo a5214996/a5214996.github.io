@@ -74,6 +74,21 @@
     height: 100% !important;
   }
 
+  .video-container:hover .banner {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .banner{
+  	visibility: hidden;
+  	display:block;
+	position: absolute;
+	top: 0;
+	right:0;
+    z-index: 1000;
+    transition: opacity 1s ease-out, visibility 0.1s 0s;
+  }
+
   #side {
 	height:100%;
     width: 100%;
