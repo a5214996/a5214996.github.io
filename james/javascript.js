@@ -187,7 +187,7 @@ function hideChat() {
 	$("#chatvo").text(isVisible ? "hide chat" : "show chat");
 	$("#main").css("width", isVisible ? "calc(100% - 283px)" : "100%");
 
-	SetChat();
+	setChat();
 	updateVideo();
 }
 
