@@ -18,7 +18,7 @@ html, body {
 #main {
 	background-color: #000;
 	overflow: hidden;
-	width: calc(100% - 340px);
+    width: calc(100% - 283px);
 	height: calc(100% - 50px);
 	transform-style: preserve-3d;
 }

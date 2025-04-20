@@ -35,10 +35,10 @@ function toggleChat() {
 
   $side.toggle();
   $("#chatvo").text(isVisible ? "show chat" : "hide chat");
-  $("#main").css("width", isVisible ? "100%" : "calc(100% - 283px)");
+
+  const sideWidth = isVisible ? $side.width() : 0;
 
   setChat();
-  updateVideo();
 }
 
 function checkForVideoUpdate() {
@@ -61,7 +61,7 @@ function setPlayer(host, channel) {
 function getRes() {
   const sideWidth = $('#side').is(':visible') ? $('#side').width() : 0;
   const width = Math.floor(window.innerWidth - sideWidth);
-  return { width, height: Math.floor(width * 0.5625) };
+  return { width, height: Math.floor(width * 0.5625) }; // Maintain 16:9 aspect ratio
 }
 
 function getPlayerEmbed(host, channel) {
@@ -96,9 +96,9 @@ function getPlayerEmbed(host, channel) {
           channel: "${channel}"
         }).setVolume(0.0);
       </script>`;
-   case "angel":
+    case "angel":
       return `<div class="banner"><img src="/assets/banner.png"></div><iframe src="https://player.angelthump.com/?channel=${channel}" width="100%" height="100%" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
-   case "angels":
+    case "angels":
       return getServerSelectionEmbed();
     default:
       return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
@@ -181,19 +181,18 @@ function setChat() {
   $('#chat-container').html(getChatEmbed(channel, mode));
 }
 
-function hideChat() {
-	const isVisible = $('#side').toggle().is(":visible");
-	
-	$("#chatvo").text(isVisible ? "hide chat" : "show chat");
-	$("#main").css("width", isVisible ? "calc(100% - 283px)" : "100%");
-
-	setChat();
-	updateVideo();
+function toggleChat() {
+  const isVisible = $('#side').toggle().is(":visible");
+  $("#chatvo").html(isVisible ? "hide chat" : "show chat");
+  $("#main").css("width", isVisible ? "calc(100% - 283px)" : "100%");
+  
+  setChat();
+  updateVideo();
 }
 
 function popoutChat() {
-    window.open("/chat", "_blank");
-    if ($("#side").is(":visible")) hideChat();
+  window.open("/chat", "_blank");
+  if ($("#side").is(":visible")) toggleChat();
 }
 
 function getChatEmbed(channel, mode) {
