@@ -94,7 +94,7 @@ function getPlayerEmbed(host, channel) {
 }
 
 function getOfflineEmbed() {
-  return '<div id="o"><a href="https://discord.gg/quackpack" target="_blank"><img src="discord.png" style="height:32px"></a></div>';
+  return '<div id="o"><a href="https://discord.gg/quackpack" target="_blank"><img src="/assets/discord.png"></a></div>';
 }
 
 function getServerSelectionEmbed() {
