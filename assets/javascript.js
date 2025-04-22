@@ -164,30 +164,25 @@ function setServer(host, channel, region) {
   }
 }
 
+function getChatEmbed() {
+    return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">` +
+      `{"handle":"${channel}","arch":"js","styles":{"a":"000000","b":100,"c":"444444","d":"FFFFFF","e":"000000","f":100,"g":"444444","h":"000000","i":100,"j":"444444","k":"444444","l":"000000","m":"444444","n":"444444","p":11,"q":"000000","r":0,"t":0,"v":0,"ab":1,"sbc":"444444","sba":100,"surl":0,"allowpm":1,"v":0,"w":0,"showhdr":0,"showx":0}}` +
+      '</script>';
+}
+
 function setChat() {
-  const mode = $("#chatvo").text().includes("show") ? "hide" : "night";
-  $('#chat-container').html(getChatEmbed(channel, mode));
+  const mode = $("#chatvo").text().includes("show") ? "hide" : "show";
+  if (mode === 'show') $('#chat-container').html(getChatEmbed());
 }
 
 function toggleChat() {
   const isVisible = $('#side').toggle().is(":visible");
   $("#chatvo").html(isVisible ? "hide chat" : "show chat");
-
-  setChat();
 }
 
 function popoutChat() {
   window.open("/chat", "_blank");
   if ($("#side").is(":visible")) toggleChat();
-}
-
-function getChatEmbed(channel, mode) {
-  if (mode === 'night') {
-    return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">` +
-      `{"handle":"${channel}","arch":"js","styles":{"a":"000000","b":100,"c":"444444","d":"FFFFFF","e":"000000","f":100,"g":"444444","h":"000000","i":100,"j":"444444","k":"444444","l":"000000","m":"444444","n":"444444","p":11,"q":"000000","r":0,"t":0,"v":0,"ab":1,"sbc":"444444","sba":100,"surl":0,"allowpm":1,"v":0,"w":0,"showhdr":0,"showx":0}}` +
-      '</script>';
-  }
-  return ''; 
 }
 
 $(document).ready(() => {
