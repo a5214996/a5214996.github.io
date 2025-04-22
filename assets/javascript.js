@@ -1,5 +1,4 @@
-﻿const channel = "lal420";
-const lastModifiedKey = "modvideo";
+﻿const lastModifiedKey = "modvideo";
 
 document.addEventListener("visibilitychange", () => {
   document.title = document.hidden ? "Hot Dudes" : "Do not share";
@@ -167,7 +166,7 @@ function setServer(host, channel, region) {
 function getChatEmbed() {
     return `<script id="cid0020000080393759078" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">
 	{
-		"handle":"${channel}",
+		"handle":"lal420",
 		"arch":"js",
 		"styles":{
 			"a":"000000",
