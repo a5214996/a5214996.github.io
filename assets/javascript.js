@@ -205,14 +205,23 @@ function setChat() {
   $('#chat-container').html(getChatEmbed());
 }
 
+let lastToggle = 0;
+
 function toggleChat() {
-  const isVisible = $('#side').toggle().is(":visible");
-  $("#chatvo").html(isVisible ? "hide chat" : "show chat");
+  const now = Date.now();
+  if (now - lastToggle < 500) return;
+  lastToggle = now;
+
+  const $side = $('#side');
+  const isVisible = $side.toggle().is(":visible");
+  $('#chatvo').html(isVisible ? "hide chat" : "show chat");
 }
 
 function popoutChat() {
   window.open("/chat", "_blank");
-  if ($("#side").is(":visible")) toggleChat();
+  if ($('#side').is(":visible")) {
+    toggleChat();
+  }
 }
 
 $(document).ready(() => {
