@@ -41,7 +41,7 @@ function checkForVideoUpdate() {
 }
 
 function setPlayer(host, channel) {
-  const playerType = !channel ? "offline" : host;
+  const playerType = !host ? "offline" : host;
   $('#video-wrapper').html(getPlayerEmbed(playerType, channel));
 }
 
@@ -53,8 +53,6 @@ function getRes() {
 
 function getPlayerEmbed(host, channel) {
   const { width, height } = getRes();
-
-  if (channel && channel.includes("1-edge")) channel = updateChannel(channel);
 
   if (host === "offline") document.getElementById("b").style.display = "none";
 
@@ -108,17 +106,6 @@ function getServerSelectionEmbed() {
     <a href="#" onclick="updateServer('sea');return false;" style="font-size:30px;color:#FFF"><b>SEA</b></a><br/>
     <span style="font-size:20px">Try a different server if you're lagging</span>
   </h1>`;
-}
-
-function updateChannel(channel) {
-  const con = Date.now();
-  if (channel.includes("1-edge") && mobile) {
-    const ch = channel.split("/")[4].split(".")[0];
-    channel = `${channel.split('tv')[0]}tv/hls/${ch}/index.m3u8`;
-  }
-  if (channel.includes("1-edge")) channel += `?token=public&con=${con}`;
-  if (channel.includes("east")) channel = channel.replace(/[4]/, Math.floor(Math.random() * 2) + 4);
-  return channel;
 }
 
 function updateServer(region) {
