@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer">
+  <title>Stream Player</title>
+  <link rel="icon" href="data:,">
+  <!-- Shaka Player UI Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
+  <script src="shaka-player.ui.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-container">
+    <video id="video" class="shaka-video"></video>
+  </div>
+
+  <script>
+
+    function guid() {
+      function _p8(s) {
+        var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+        return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+      }
+      return _p8() + _p8(true) + _p8(true) + _p8();
+    }
+
+    function onErrorEvent(event) {
+      onError(event.detail);
+    }
+
+    function onError(error) {
+      console.error('Error code', error.code, 'object', error);
+    }
+	
+	// Listen for when the track changes
+	function monitorTrackChange() {
+		let previousTrackId = null;
+		
+		setInterval(() => {
+		  const selectedTrack = player.getVariantTracks().find(t => t.active);
+		  if (selectedTrack && selectedTrack.id !== previousTrackId) {
+			console.log('Track changed to:', selectedTrack);
+			previousTrackId = selectedTrack.id;
+		  }
+		}, 1000); // Check every second
+	}
+	
+	async function initPlayer() {
+		const video = document.getElementById('video');
+		const container = document.querySelector('.video-container');
+		const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
+		const controls = ui.getControls();
+		const player = controls.getPlayer();
+
+		window.player = player;
+		window.ui = ui;
+
+		player.configure({
+			abr: {
+				enabled: false
+			},
+			manifest: {
+			  disableThumbnails: true
+			},
+			drm: {
+			  clearKeys: 
+				{'21b08563fe66c782d1761bc6b335915f': 'c5868f494a96624c2b5ea3a6f5f89c5d'}
+			}
+		});
+		shaka.polyfill.installAll();
+		player.addEventListener('error', onErrorEvent);
+		controls.addEventListener('error', onErrorEvent);
+
+	  var manifestUri = "https://nbalpng.akamaized.net/live-pz/a/hls-wv-sd/g0042400173den1000869lac/index.m3u8?start=2025-04-24T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false"
+	  
+	  manifestUri = manifestUri + '&sessionId=' + guid();
+	 
+		try {
+			await player.load(manifestUri);
+			monitorTrackChange();
+			console.log('The video has now been loaded!');
+		} catch (error) {
+			onError(error);
+		}
+
+	}
+
+document.addEventListener('shaka-ui-loaded', initPlayer);
+
+  </script>
+
+</body>
+</html>

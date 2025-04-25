@@ -61,6 +61,8 @@ function getPlayerEmbed(host, channel) {
   switch (host) {
     case "offline":
       return getOfflineEmbed();
+	case "embed":
+	  return `<iframe src="embed.html" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
     case "youtube":
       return `<iframe src="https://www.youtube.com/embed/${channel}?autoplay=1" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     case "clappr":
