@@ -8,7 +8,6 @@
   <!-- Shaka Player UI Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
   <script src="shaka-player.ui.js"></script>
-  <script src="/assets/shaka-player.ui.js"></script>
   <style>
     html, body {
       margin: 0;
@@ -87,14 +86,14 @@
 			},
 			drm: {
 			  clearKeys: 
-				{'21b08563fe66c782d1761bc6b335915f': 'c5868f494a96624c2b5ea3a6f5f89c5d'}
+				{'f4bb1050c3f3f356caf95a4e83ffed80': 'e6febac5528ac5d79725f404f248bff9'}
 			}
 		});
 		shaka.polyfill.installAll();
 		player.addEventListener('error', onErrorEvent);
 		controls.addEventListener('error', onErrorEvent);
 
-	  var manifestUri = "https://nbalpng.akamaized.net/live-pz/a/hls-wv-sd/g0042400173den1000869lac/index.m3u8?start=2025-04-24T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false"
+	  var manifestUri = "https://nbalpng.akamaized.net/live-pz/a/hls-wv-sd/g0042400143okc1000782mem/index.m3u8?start=2025-04-24T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false"
 	  
 	  manifestUri = manifestUri + '&sessionId=' + guid();
 	 
