@@ -37,7 +37,6 @@
   </div>
 
   <script>
-
     function guid() {
       function _p8(s) {
         var p = (Math.random().toString(16) + "000000000").substr(2, 8);
@@ -96,8 +95,10 @@
         console.error('No valid video data found in sessionStorage.');
       }
     }
-
-    document.addEventListener('shaka-ui-loaded', initPlayer);
+	
+    if (window.top.location.hostname === window.location.hostname) {
+		document.addEventListener('shaka-ui-loaded', initPlayer);
+	}
 
   </script>
 
