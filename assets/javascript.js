@@ -21,12 +21,7 @@ function updateVideo() {
 	  }
     },
     error: (xhr) => {
-      try {
-        const err = JSON.parse(xhr.responseText);
-        alert(err.Message);
-      } catch {
         console.error("Invalid response from video.json");
-      }
     }
   });
 }
