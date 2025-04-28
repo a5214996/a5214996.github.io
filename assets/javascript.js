@@ -116,12 +116,7 @@ function updateServer(region) {
       sessionStorage.setItem(lastModifiedKey, xhr.getResponseHeader("Last-Modified"));
     },
     error: (xhr) => {
-      try {
-        const err = JSON.parse(xhr.responseText);
-        alert(err.Message);
-      } catch {
         console.error("Invalid JSON from server switch");
-      }
     }
   });
 }
