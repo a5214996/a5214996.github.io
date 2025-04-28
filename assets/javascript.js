@@ -1,4 +1,4 @@
-﻿const lastModifiedKey = "modvideo";
+﻿const lastModifiedKey = "lastModified";
 
 document.addEventListener("visibilitychange", () => {
   document.title = document.hidden ? "Hot Dudes" : "Do not share";
@@ -16,6 +16,9 @@ function updateVideo() {
     success: (response, _, xhr) => {
       setPlayer(response.host, response.channel);
       sessionStorage.setItem(lastModifiedKey, xhr.getResponseHeader("Last-Modified"));
+      if (response && response.keys) {
+		sessionStorage.setItem('videoData', JSON.stringify(response));
+	  }
     },
     error: (xhr) => {
       try {
