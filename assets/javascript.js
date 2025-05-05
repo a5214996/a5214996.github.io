@@ -88,9 +88,10 @@ function getPlayerEmbed(host, channel) {
     case "angels":
       return getServerSelectionEmbed();
     case 'redirect':
-	        return `<script>window.location.href = "/" + "' + c + '";</script>`;
+	        return `<script>window.location.href = "/${channel}/";</script>`;
     default:
-      	return `<script>window.location.href = "/${channel}";</script>`;
+      return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
+	  
   }
 }
 
