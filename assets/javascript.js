@@ -1,4 +1,4 @@
-﻿const lastModifiedKey = "lastModified";
+﻿const lastModifiedKey = `lastModified:${window.location.pathname}`;
 
 document.addEventListener("visibilitychange", () => {
   document.title = document.hidden ? "Hot Dudes" : "Do not share";
@@ -32,6 +32,7 @@ function checkForVideoUpdate() {
     type: "HEAD",
     success: (_, __, xhr) => {
       if (xhr.getResponseHeader("Last-Modified") !== sessionStorage.getItem(lastModifiedKey)) {
+		console.log("Video updated: ", xhr.getResponseHeader("Last-Modified"), sessionStorage.getItem(lastModifiedKey),xhr.getResponseHeader("Last-Modified") !== sessionStorage.getItem(lastModifiedKey));
         updateVideo();
       }
     }
@@ -91,7 +92,6 @@ function getPlayerEmbed(host, channel) {
 	  return `<script>window.location.href = "/${channel}/";</script>`;
     default:
       return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
-	  
   }
 }
 
@@ -214,5 +214,5 @@ function popoutChat() {
 $(document).ready(() => {
   setChat();
   updateVideo();
-  setInterval(checkForVideoUpdate, 30000);
+  setInterval(checkForVideoUpdate, 15000);
 });
