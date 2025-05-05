@@ -58,7 +58,7 @@ function getPlayerEmbed(host, channel) {
     case "offline":
       return getOfflineEmbed();
 	case 'ok':
-		return '<iframe src=//ok.ru/videoembed/' + c + '?autoplay=1 width=100% height=100% allow=autoplay resizable=true id=stream frameborder=0 scrolling=no allowtransparency=true allowfullscreen></iframe>';
+      return `<iframe src="//ok.ru/videoembed/${channel}?autoplay=1" width="100%" height="100%" allow="autoplay" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
 	case "embed":
 	  return `<iframe src="embed.html" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
     case "youtube":
@@ -88,7 +88,7 @@ function getPlayerEmbed(host, channel) {
     case "angels":
       return getServerSelectionEmbed();
     case 'redirect':
-	        return `<script>window.location.href = "/${channel}/";</script>`;
+	  return `<script>window.location.href = "/${channel}/";</script>`;
     default:
       return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
 	  
