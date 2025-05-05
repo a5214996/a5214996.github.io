@@ -87,8 +87,10 @@ function getPlayerEmbed(host, channel) {
       return `<div class="banner"><img src="/assets/banner.png"></div><iframe src="https://player.angelthump.com/?channel=${channel}" width="100%" height="100%" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
     case "angels":
       return getServerSelectionEmbed();
+    case 'redirect':
+	        return `<script>window.location.href = "/" + "' + c + '";</script>`;
     default:
-      return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
+      	return `<script>window.location.href = "/${channel}";</script>`;
   }
 }
 
