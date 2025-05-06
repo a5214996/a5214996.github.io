@@ -25,13 +25,9 @@ function checkForVideoUpdate() {
     url: `video.json?${Date.now()}`,
     type: "HEAD",
     success: (_, __, xhr) => {
-      const newTime = new Date(xhr.getResponseHeader("Last-Modified")).getTime();
-      const oldTime = new Date(sessionStorage.getItem(lastModifiedKey)).getTime();
-      const hasChanged = newTime !== oldTime;
-
-	  console.log(`Checking... newTime: ${newTime}, oldTime: ${oldTime}, changed: ${hasChanged}`)
-	  
-      if (hasChanged) updateVideo();
+      const modifiedTime = new Date(xhr.getResponseHeader("Last-Modified")).getTime();
+      const sessionTime = new Date(sessionStorage.getItem(lastModifiedKey)).getTime();
+      if (modifiedTime !== sessionTime) updateVideo();
     }
   });
 }
@@ -189,13 +185,8 @@ function setChat() {
   $('#chat-container').html(getChatEmbed());
 }
 
-let lastToggle = 0;
-
+// chat wont reload!
 function toggleChat() {
-  const now = Date.now();
-  if (now - lastToggle < 500) return;
-  lastToggle = now;
-
   const $side = $('#side');
   const isVisible = $side.toggle().is(":visible");
   $('#chatvo').html(isVisible ? "hide chat" : "show chat");
@@ -211,5 +202,5 @@ function popoutChat() {
 $(document).ready(() => {
   setChat();
   updateVideo();
-  setInterval(checkForVideoUpdate, 10000);
+  setInterval(checkForVideoUpdate, 5000);
 });
