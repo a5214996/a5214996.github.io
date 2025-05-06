@@ -9,20 +9,14 @@ function refreshVideo() {
 }
 
 function updateVideo() {
-  $.ajax({
-    url: `video.json?${Date.now()}`,
-    type: "GET",
-    dataType: "json",
-    success: (response, _, xhr) => {
-      setPlayer(response.host, response.channel);
-      sessionStorage.setItem(lastModifiedKey, xhr.getResponseHeader("Last-Modified"));
-      if (response && response.keys) {
-		sessionStorage.setItem('videoData', JSON.stringify(response));
-	  }
-    },
-    error: (xhr) => {
-        console.error("Invalid response from video.json");
+  $.getJSON(`video.json?${Date.now()}`, (response, _, xhr) => {
+    setPlayer(response.host, response.channel);
+    sessionStorage.setItem(lastModifiedKey, xhr.getResponseHeader("Last-Modified"));
+    if (response?.keys) {
+      sessionStorage.setItem('videoData', JSON.stringify(response));
     }
+  }).fail(() => {
+    console.error("Failed to fetch video.json");
   });
 }
 
@@ -31,10 +25,13 @@ function checkForVideoUpdate() {
     url: `video.json?${Date.now()}`,
     type: "HEAD",
     success: (_, __, xhr) => {
-      if (xhr.getResponseHeader("Last-Modified") !== sessionStorage.getItem(lastModifiedKey)) {
-		console.log("Video updated: ", xhr.getResponseHeader("Last-Modified"), sessionStorage.getItem(lastModifiedKey),xhr.getResponseHeader("Last-Modified") !== sessionStorage.getItem(lastModifiedKey));
-        updateVideo();
-      }
+      const newTime = new Date(xhr.getResponseHeader("Last-Modified")).getTime();
+      const oldTime = new Date(sessionStorage.getItem(lastModifiedKey)).getTime();
+      const hasChanged = newTime !== oldTime;
+
+	  console.log(`Checking... newTime: ${newTime}, oldTime: ${oldTime}, changed: ${hasChanged}`)
+	  
+      if (hasChanged) updateVideo();
     }
   });
 }
