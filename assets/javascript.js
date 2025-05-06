@@ -5,9 +5,9 @@
 function setVideo(refresh = false) {
   $.getJSON(`video.json?${Date.now()}`, (res) => {
     const v = sessionStorage.getItem('v');
-    if (refresh || res.version !== v) {
+    if (refresh || !v || (res.version && res.version !== v)) {
       setPlayer(res.host, res.channel);
-      if (res.version) sessionStorage.setItem('v', res.version);
+      sessionStorage.setItem('v', res.version || '0');
       if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
     }
   });
