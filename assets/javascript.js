@@ -4,32 +4,19 @@ document.addEventListener("visibilitychange", () => {
   document.title = document.hidden ? "Hot Dudes" : "Do not share";
 });
 
+function setVideo(refresh = false) {
+  $.getJSON(`video.json?${Date.now()}`, (res) => {
+    const currentVersion = sessionStorage.getItem('currentVersion');
+    if (refresh || res.version === null || res.version !== currentVersion) {
+      setPlayer(res.host, res.channel);
+      if (res?.version) sessionStorage.setItem('currentVersion', res.version);
+      if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
+    }
+  });
+}
+
 function refreshVideo() {
-  updateVideo();
-}
-
-function updateVideo() {
-  $.getJSON(`video.json?${Date.now()}`, (response, _, xhr) => {
-    setPlayer(response.host, response.channel);
-    sessionStorage.setItem(lastModifiedKey, xhr.getResponseHeader("Last-Modified"));
-    if (response?.keys) {
-      sessionStorage.setItem('videoData', JSON.stringify(response));
-    }
-  }).fail(() => {
-    console.error("Failed to fetch video.json");
-  });
-}
-
-function checkForVideoUpdate() {
-  $.ajax({
-    url: `video.json?${Date.now()}`,
-    type: "HEAD",
-    success: (_, __, xhr) => {
-      const modifiedTime = new Date(xhr.getResponseHeader("Last-Modified")).getTime();
-      const sessionTime = new Date(sessionStorage.getItem(lastModifiedKey)).getTime();
-      if (modifiedTime !== sessionTime) updateVideo();
-    }
-  });
+  setVideo(true);
 }
 
 function setPlayer(host, channel) {
@@ -201,6 +188,5 @@ function popoutChat() {
 
 $(document).ready(() => {
   setChat();
-  updateVideo();
-  setInterval(checkForVideoUpdate, 5000);
+  setInterval(setVideo();, 5000);
 });
