@@ -1,6 +1,4 @@
-﻿const lastModifiedKey = `lastModified:${window.location.pathname}`;
-
-document.addEventListener("visibilitychange", () => {
+﻿document.addEventListener("visibilitychange", () => {
   document.title = document.hidden ? "Hot Dudes" : "Do not share";
 });
 
@@ -8,11 +6,10 @@ function setVideo(refresh = false) {
   console.log("setVideo called");
   $.getJSON(`video.json?${Date.now()}`, (res) => {
 	console.log("getJSON called");
-    const currentVersion = sessionStorage.getItem('currentVersion');
-	console.log(refresh, res.version === null, res.version, currentVersion);
-    if (refresh || res.version === null || res.version !== currentVersion) {
+    const v = sessionStorage.getItem('v');
+    if (refresh || res.version !== v) {
       setPlayer(res.host, res.channel);
-      if (res?.version) sessionStorage.setItem('currentVersion', res.version);
+      sessionStorage.setItem('v', res.version || '00');
       if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
     }
   });
