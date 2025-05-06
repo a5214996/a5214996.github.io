@@ -3,9 +3,7 @@
 });
 
 function setVideo(refresh = false) {
-  console.log("setVideo called");
   $.getJSON(`video.json?${Date.now()}`, (res) => {
-	console.log("getJSON called");
     const v = sessionStorage.getItem('v');
     if (refresh || res.version !== v) {
       setPlayer(res.host, res.channel);
