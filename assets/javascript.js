@@ -7,7 +7,7 @@ document.addEventListener("visibilitychange", () => {
 function setVideo(refresh = false) {
   $.getJSON(`video.json?${Date.now()}`, (res) => {
     const currentVersion = sessionStorage.getItem('currentVersion');
-	console.log(refresh, res.version === null, res.version ,currentVersion)
+	console.log(refresh, res.version === null, res.version, currentVersion);
     if (refresh || res.version === null || res.version !== currentVersion) {
       setPlayer(res.host, res.channel);
       if (res?.version) sessionStorage.setItem('currentVersion', res.version);
