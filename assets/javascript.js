@@ -188,5 +188,5 @@ function popoutChat() {
 
 $(document).ready(() => {
   setChat();
-  setInterval(setVideo();, 5000);
+  setInterval(setVideo(), 5000);
 });
