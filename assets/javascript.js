@@ -7,7 +7,7 @@ function setVideo(refresh = false) {
     const v = sessionStorage.getItem('v');
     if (refresh || res.version !== v) {
       setPlayer(res.host, res.channel);
-      sessionStorage.setItem('v', res.version || '00');
+      if (res?.version) sessionStorage.setItem('v', res.version);
       if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
     }
   });
