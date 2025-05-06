@@ -5,7 +5,7 @@
 function setVideo(refresh = false) {
   $.getJSON(`video.json?${Date.now()}`, (res) => {
     const v = sessionStorage.getItem('v');
-    if (refresh || !v || (res.version && res.version !== v)) {
+    if (refresh || (res.version && res.version !== v)) {
       setPlayer(res.host, res.channel);
       sessionStorage.setItem('v', res.version || '0');
       if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
@@ -186,6 +186,6 @@ function popoutChat() {
 
 $(document).ready(() => {
   setChat();
-  setVideo();
+  setVideo(true);
   setInterval(() => setVideo(), 5000);
 });
