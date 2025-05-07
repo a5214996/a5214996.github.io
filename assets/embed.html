@@ -70,7 +70,7 @@
       const channel = sessionStorage.getItem('c');
       const key = JSON.parse(sessionStorage.getItem('k'));
 	  
-      if (channel && keys) {
+      if (channel && key) {
         manifestUri = channel + '&sessionId=' + guid();
 		
 		player.configure({
