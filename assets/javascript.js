@@ -1,14 +1,10 @@
-﻿document.addEventListener("visibilitychange", () => {
-  document.title = document.hidden ? "Hot Dudes" : "Do not share";
-});
-
-function setVideo(refresh = false) {
+﻿function setVideo(refresh = false) {
   $.getJSON(`video.json?${Date.now()}`, (res) => {
-    const v = sessionStorage.getItem('v');
-    if (refresh || (res.version && res.version !== v)) {
+    const c = sessionStorage.getItem('c');
+    if (res.channel && (refresh || res.channel !== c)) {
       setPlayer(res.host, res.channel);
-      sessionStorage.setItem('v', res.version || '0');
-      if (res?.keys) sessionStorage.setItem('videoData', JSON.stringify(res));
+      sessionStorage.setItem('c', res.channel);
+      if (res?.keys) sessionStorage.setItem('e', JSON.stringify(res));
     }
   });
 }
@@ -34,8 +30,6 @@ function getPlayerEmbed(host, channel) {
   if (host === "offline") document.getElementById("b").style.display = "none";
 
   switch (host) {
-    case "offline":
-      return getOfflineEmbed();
 	case 'ok':
       return `<iframe src="//ok.ru/videoembed/${channel}?autoplay=1" width="100%" height="100%" allow="autoplay" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
 	case "embed":
@@ -68,8 +62,9 @@ function getPlayerEmbed(host, channel) {
       return getServerSelectionEmbed();
     case 'redirect':
 	  return `<script>window.location.href = "/${channel}/";</script>`;
+    case "offline":
     default:
-      return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
+	  return getOfflineEmbed();
   }
 }
 
@@ -183,6 +178,10 @@ function popoutChat() {
     toggleChat();
   }
 }
+
+document.addEventListener("visibilitychange", () => {
+  document.title = document.hidden ? "Hot Dudes" : "Do not share";
+});
 
 $(document).ready(() => {
   setChat();

@@ -67,9 +67,9 @@
       player.addEventListener('error', onErrorEvent);
       controls.addEventListener('error', onErrorEvent);
 
-      const videoData = JSON.parse(sessionStorage.getItem('videoData'));
-      if (videoData && videoData.channel && videoData.keys) {
-        let { channel, keys } = videoData;
+      const embed = JSON.parse(sessionStorage.getItem('e'));
+      if (embed && embed.channel && embed.keys) {
+        let { channel, keys } = embed;
 
         manifestUri = channel + '&sessionId=' + guid();
 		
