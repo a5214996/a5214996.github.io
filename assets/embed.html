@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="referrer" content="no-referrer">
-  <title>Embed</title>
-  <link rel="icon" href="data:,">
-  <!-- Shaka Player UI Styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
-  <script src="/assets/shaka-player.ui.js"></script>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .video-container {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    video {
-      width: 100%;
-      height: 100%;
-      background: #000;
-    }
-  </style>
+	<title>Embed</title>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="data:,">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.5/controls.css">
+	<style>
+		html, body {
+		  margin: 0;
+		  padding: 0;
+		  background: #000;
+		  height: 100vh;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		}
+		.video-container {
+		  width: 100%;
+		  height: 100%;
+		  overflow: hidden;
+		}
+		video {
+		  width: 100%;
+		  height: 100%;
+		  background: #000;
+		}
+	</style>
 </head>
 <body>
 
   <div class="video-container">
     <video id="video" class="shaka-video"></video>
   </div>
-
+  
+  <script src="/assets/shaka-player.ui.js"></script>
   <script>
     function guid() {
       function _p8(s) {
@@ -101,6 +101,5 @@
 	}
 
   </script>
-
 </body>
 </html>
