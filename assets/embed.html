@@ -68,7 +68,7 @@
       controls.addEventListener('error', onErrorEvent);
 
       const channel = JSON.parse(sessionStorage.getItem('c'));
-      const keys = JSON.parse(sessionStorage.getItem('k'));
+      const key = JSON.parse(sessionStorage.getItem('k'));
 	  
       if (channel && keys) {
         manifestUri = channel + '&sessionId=' + guid();
@@ -81,7 +81,7 @@
 			  disableThumbnails: true
 			},
 			drm: {
-			  clearKeys: keys
+			  clearKeys: key
 			}
 		});
 
