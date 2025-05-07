@@ -67,7 +67,7 @@
       player.addEventListener('error', onErrorEvent);
       controls.addEventListener('error', onErrorEvent);
 
-      const channel = JSON.parse(sessionStorage.getItem('c'));
+      const channel = sessionStorage.getItem('c');
       const key = JSON.parse(sessionStorage.getItem('k'));
 	  
       if (channel && keys) {
