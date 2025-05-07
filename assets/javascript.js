@@ -4,7 +4,7 @@
     if (res.channel && (refresh || res.channel !== c)) {
       setPlayer(res.host, res.channel);
       sessionStorage.setItem('c', res.channel);
-      if (res?.keys) sessionStorage.setItem('e', JSON.stringify(res));
+      if (res.keys) sessionStorage.setItem('k', JSON.stringify(res.keys));
     }
   });
 }
@@ -33,7 +33,7 @@ function getPlayerEmbed(host, channel) {
 	case 'ok':
       return `<iframe src="//ok.ru/videoembed/${channel}?autoplay=1" width="100%" height="100%" allow="autoplay" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
 	case "embed":
-	  return `<iframe src="embed.html" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
+	  return `<iframe src="/assets/embed.html" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
     case "youtube":
       return `<iframe src="https://www.youtube.com/embed/${channel}?autoplay=1" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     case "clappr":

@@ -67,10 +67,10 @@
       player.addEventListener('error', onErrorEvent);
       controls.addEventListener('error', onErrorEvent);
 
-      const embed = JSON.parse(sessionStorage.getItem('e'));
-      if (embed && embed.channel && embed.keys) {
-        let { channel, keys } = embed;
-
+      const channel = JSON.parse(sessionStorage.getItem('c'));
+      const keys = JSON.parse(sessionStorage.getItem('k'));
+	  
+      if (channel && keys) {
         manifestUri = channel + '&sessionId=' + guid();
 		
 		player.configure({
