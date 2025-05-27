@@ -64,15 +64,6 @@ function getPlayerEmbed(host, channel) {
       return `<iframe src="https://www.youtube.com/embed/${channel}?autoplay=1" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     case 'redirect':
 	  return `<script>window.location.href = "/${channel}/";</script>`;
-  case "dyntube":
-    return `<div style="position:relative;width:100%;overflow:hidden;padding-top:56.25%">
-      <iframe id="stream" 
-        style="position:absolute;top:0;left:0;bottom:0;right:0;width:100%;height:100%;border:none" 
-        allow="autoplay; fullscreen" webkitallowfullscreen mozallowfullscreen allowfullscreen 
-        src="https://player.dyntube.com/live-embeds/${channel}" 
-        title="Stream"></iframe>
-      <script src="https://embed.dyntube.com/v2/player/player.js"></script>
-    </div>`;
     case "offline":
     default:
 	  return getOfflineEmbed();
