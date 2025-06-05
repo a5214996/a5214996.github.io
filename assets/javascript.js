@@ -24,6 +24,10 @@ function getRes() {
   return { width, height: Math.floor(width * 0.5625) }; // Maintain 16:9 aspect ratio
 }
 
+function getOfflineEmbed() {
+  return '<div id="o"><a href="https://discord.gg/quackpack" target="_blank"><img src="/assets/discord.png"></a></div>';
+}
+
 function getPlayerEmbed(host, channel) {
   const { width, height } = getRes();
 
@@ -68,10 +72,6 @@ function getPlayerEmbed(host, channel) {
     default:
 	  return getOfflineEmbed();
   }
-}
-
-function getOfflineEmbed() {
-  return '<div id="o"><a href="https://discord.gg/quackpack" target="_blank"><img src="/assets/discord.png"></a></div>';
 }
 
 function getServerSelectionEmbed() {
