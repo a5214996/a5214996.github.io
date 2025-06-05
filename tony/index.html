@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Do not share</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, noarchive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/favicon.ico" rel="shortcut icon">
+	<link rel="stylesheet" href="/assets/mobile.css?v0.11" media="screen and (max-width: 700px)">
+	<link rel="stylesheet" href="/assets/desktop.css?v0.11" media="screen and (min-width: 701px)">
+</head>
+<body>
+    <div id="nav" class="topnav">
+        <div id="b">
+            <span class="noselect fff">
+                <a href="https://discord.gg/quackpack" target="_blank">
+                    <img src="../assets/discord.png" alt="Discord">
+                </a>
+            </span>
+        </div>
+
+        <div class="topnav-right noselect">
+            <a href="javascript:void(0);" onclick="refreshVideo();">refresh video</a>
+            <a href="javascript:void(0);" onclick="popoutChat();">popout chat</a>
+            <a href="javascript:void(0);" onclick="toggleChat();"><span id="chatvo">hide chat</span></a>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="main">
+            <div class="video-container">
+                <div id="video-wrapper"></div>
+            </div>
+        </div>
+        <div id="side">
+            <div id="chat-container" name="chat-container">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/clappr/clappr@latest/dist/clappr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/clappr/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/ewwink/clappr-quality-selector-plugin@latest/quality-selector.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
+    <script type="text/javascript" src="/assets/javascript.js?255"></script>
+</body>
+</html>
