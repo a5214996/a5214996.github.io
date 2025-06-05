@@ -30,7 +30,7 @@ function getOfflineEmbed() {
 
 function getPlayerEmbed(host, channel) {
   const { width, height } = getRes();
-
+  console.log(host, channel)
   if (host === "offline") document.getElementById("b").style.display = "none";
 
   switch (host) {
@@ -64,11 +64,9 @@ function getPlayerEmbed(host, channel) {
       return `<div class="banner"><img src="/assets/banner.png"></div><iframe src="https://player.angelthump.com/?channel=${channel}" width="100%" height="100%" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
     case "angels":
       return getServerSelectionEmbed();
-    case "dynlive":
-      return `<iframe src="https://www.youtube.com/embed/${channel}?autoplay=1" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     case 'redirect':
 	  return `<script>window.location.href = "/${channel}/";</script>`;
-    case "offline":
+    case 'offline':
     default:
 	  return getOfflineEmbed();
   }
