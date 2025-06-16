@@ -25,7 +25,7 @@ function getRes() {
 }
 
 function getOfflineEmbed() {
-  return '<div id="o"><a href="https://discord.gg/quackpack" target="_blank"><img src="/assets/discord.png"></a></div>';
+  return '<div id="o"><a href="https://discord.gg/tW4yhbBfZb" target="_blank"><img src="/assets/discord.png"></a></div>';
 }
 
 function getPlayerEmbed(host, channel) {
