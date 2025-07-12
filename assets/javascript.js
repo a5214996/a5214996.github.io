@@ -30,7 +30,6 @@ function getOfflineEmbed() {
 
 function getPlayerEmbed(host, channel) {
   const { width, height } = getRes();
-  console.log(host, channel)
   if (host === "offline") document.getElementById("b").style.display = "none";
 
   switch (host) {
