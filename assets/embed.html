@@ -68,7 +68,11 @@
       controls.addEventListener('error', onErrorEvent);
 
       const channel = sessionStorage.getItem('c');
-      const key = JSON.parse(sessionStorage.getItem('k'));
+	  let key = sessionStorage.getItem('k');
+
+	  while (typeof key === 'string') {
+	    key = JSON.parse(key);
+	  }
 	  
       if (channel && key) {
         manifestUri = channel + '&sessionId=' + guid();
