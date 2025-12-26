@@ -76,9 +76,7 @@
 	  
       if (channel && key) {
         manifestUri = channel + '&sessionId=' + guid();
-		console.log('clearKeys value:', key);
-		console.log('type:', typeof key);
-		console.log('isArray:', Array.isArray(key));
+
 		player.configure({
 			abr: {
 				enabled: false
