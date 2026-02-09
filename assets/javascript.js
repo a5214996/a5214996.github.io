@@ -45,7 +45,7 @@ function getPlayerEmbed(host, channel) {
           source: "${channel}",
           mute: true,
           autoPlay: true,
-          plugins: [DashShakaPlayback, QualitySelector],
+          plugins: [HlsjsPlayback, DashShakaPlayback, QualitySelector],
           parentId: "#player",
           height: ${height},
           width: "100%"
