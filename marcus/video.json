@@ -1,7 +1,4 @@
 {
-  "host": "embed",
-  "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022500913lac1000474sas/index.m3u8?start=2026-03-06T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=a54c98b0-513e-5b13-8f49-b2f695956c97",
-  "keys": {
-    "2658e78b38b2c97b950b6f74654fa1ba": "71bf4b9ce087ccff1c3262c804b41cd3"
-  }
+  "host": "angel",
+  "channel": "lemao"
 }
