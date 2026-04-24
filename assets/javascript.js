@@ -37,6 +37,8 @@ function getPlayerEmbed(host, channel) {
       return `<iframe src="//ok.ru/videoembed/${channel}?autoplay=1" width="100%" height="100%" allow="autoplay" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
 	case "embed":
 	  return `<iframe src="/assets/embed.html" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
+	case "iframe":
+	  return `<iframe src="${channel}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`
     case "youtube":
       return `<iframe src="https://www.youtube.com/embed/${channel}?autoplay=1" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     case "clappr":
