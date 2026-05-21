@@ -1,4 +1,4 @@
 {
-  "host": "embed",
+  "host": "iframe",
   "channel": "https://pooembed.eu/embed/nba/2026-05-20/sa-okc"
 }
