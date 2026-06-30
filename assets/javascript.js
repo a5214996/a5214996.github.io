@@ -2,7 +2,7 @@
   $.getJSON(`video.json?${Date.now()}`, (res) => {
     const c = sessionStorage.getItem('c');
     if (res.channel && (refresh || res.channel !== c)) {
-      setPlayer(res.host, res.channel);
+      setPlayer(res.host, res.channel, res.urlparam);
       sessionStorage.setItem('c', res.channel);
       if (res.keys) sessionStorage.setItem('k', JSON.stringify(res.keys));
     }
@@ -11,6 +11,15 @@
 
 function refreshVideo() {
   setVideo(true);
+}
+
+function getStreamDate() {
+  // Day rolls over at 4am ET (UTC-4 in summer, UTC-5 in winter)
+  const now = new Date();
+  const etOffset = -5; // EST; adjust to -4 for EDT if needed
+  const et = new Date(now.getTime() + (etOffset * 60 + now.getTimezoneOffset()) * 60000);
+  if (et.getHours() < 4) et.setDate(et.getDate() - 1);
+  return et.toISOString().slice(0, 10);
 }
 
 function setPlayer(host, channel) {
@@ -65,6 +74,11 @@ function getPlayerEmbed(host, channel) {
       return `<div class="banner"><img src="/assets/banner.png"></div><iframe src="https://player.angelthump.com/?channel=${channel}" width="100%" height="100%" resizable="true" id="stream" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen></iframe>`;
     case "angels":
       return getServerSelectionEmbed();
+    case "urlparam": {
+      const slug = window.location.search.slice(1); // strips the '?'
+      const url = `${channel}${getStreamDate()}/${slug}`;
+      return `<iframe src="${url}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
+    }
     case 'redirect':
 	  return `<script>window.location.href = "/${channel}/";</script>`;
     case 'offline':
