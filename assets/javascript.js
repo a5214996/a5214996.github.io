@@ -76,7 +76,7 @@ function getPlayerEmbed(host, channel) {
       return getServerSelectionEmbed();
     case "urlparam": {
       const slug = window.location.search.slice(1); // strips the '?'
-      if (!slug) return '<div id="o">url parameter missing ?</div>';
+      if (!slug) return '<div style="font-size:30px;color:#FFF">url parameter missing ?</div>';
       const url = `${channel}${getStreamDate()}/${slug}`;
       return `<iframe src="${url}" width="100%" height="100%" id="stream" frameborder="0" allowfullscreen></iframe>`;
     }
