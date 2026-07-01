@@ -14,10 +14,9 @@ function refreshVideo() {
 }
 
 function getStreamDate() {
-  // Day rolls over at 4am ET (UTC-4 in summer, UTC-5 in winter)
   const now = new Date();
-  const etOffset = -5; // EST; adjust to -4 for EDT if needed
-  const et = new Date(now.getTime() + (etOffset * 60 + now.getTimezoneOffset()) * 60000);
+  const etOffset = -5; // EST; use -4 for EDT
+  const et = new Date(now.getTime() + etOffset * 60 * 60 * 1000);
   if (et.getHours() < 4) et.setDate(et.getDate() - 1);
   return et.toISOString().slice(0, 10);
 }
