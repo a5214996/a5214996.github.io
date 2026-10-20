@@ -35,75 +35,107 @@
     <video id="video" class="shaka-video"></video>
   </div>
   
-  <script src="/assets/shaka-player.ui.js"></script>
-  <script>
-    function guid() {
-      function _p8(s) {
-        var p = (Math.random().toString(16) + "000000000").substr(2, 8);
-        return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
-      }
-      return _p8() + _p8(true) + _p8(true) + _p8();
+<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/5.2.12/shaka-player.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/5.2.12/controls.min.css">
+<script defer src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+<script src="/js/freeze-frame.js"></script>
+
+<script>
+  function guid() {
+    function _p8(s) {
+      var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+      return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
     }
+    return _p8() + _p8(true) + _p8(true) + _p8();
+  }
 
-    function onErrorEvent(event) {
-      onError(event.detail);
-    }
+  function onErrorEvent(event) {
+    onError(event.detail);
+  }
 
-    function onError(error) {
-      console.error('Error code', error.code, 'object', error);
-    }
+  function onError(error) {
+    console.error('Error code', error.code, 'object', error);
+  }
 
-    async function initPlayer() {
-      const video = document.getElementById('video');
-      const container = document.querySelector('.video-container');
-      const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
-      const controls = ui.getControls();
-      const player = controls.getPlayer();
-
-      window.player = player;
-      window.ui = ui;
-
-      shaka.polyfill.installAll();
-      player.addEventListener('error', onErrorEvent);
-      controls.addEventListener('error', onErrorEvent);
-
-      const channel = sessionStorage.getItem('c');
-	  let key = sessionStorage.getItem('k');
-
-	  while (typeof key === 'string') {
-	    key = JSON.parse(key);
-	  }
-	  
-      if (channel && key) {
-        manifestUri = channel + '&sessionId=' + guid();
-
-		player.configure({
-			abr: {
-				enabled: false
-			},
-			manifest: {
-			  disableThumbnails: true
-			},
-			drm: {
-			  clearKeys: key
-			}
-		});
-
+  // NEW: open Picture-in-Picture automatically when the viewer tabs away
+  function setupAutoPip(video) {
+    if (!('mediaSession' in navigator)) return;
+    try {
+      navigator.mediaSession.setActionHandler('enterpictureinpicture', async () => {
+        if (document.pictureInPictureElement) return;
         try {
-          await player.load(manifestUri);
-          console.log('The video has now been loaded!');
-        } catch (error) {
-          onError(error);
+          await video.requestPictureInPicture();
+        } catch (err) {
+          console.warn('Auto PiP failed:', err.name, err.message);
         }
-      } else {
-        console.error('No valid video data found in sessionStorage.');
-      }
+      });
+    } catch {
+      // this browser doesn't support the action; the PiP button still works
     }
-	
-    if (window.top.location.hostname === window.location.hostname) {
-		document.addEventListener('shaka-ui-loaded', initPlayer);
-	}
+  }
 
-  </script>
+  async function initPlayer() {
+    const video = document.getElementById('video');
+    const container = document.querySelector('.video-container');
+    const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
+    const controls = ui.getControls();
+    const player = controls.getPlayer();
+
+    window.player = player;
+    window.ui = ui;
+
+    // NEW: quality, picture-in-picture, and Chromecast in the overflow (⋮) menu
+    ui.configure({
+      castReceiverAppId: '07AEE832', // replace with your own receiver ID for production
+      controlPanelElements: [
+        'play_pause', 'time_and_duration', 'spacer',
+        'mute', 'volume', 'fullscreen', 'overflow_menu'
+      ],
+      overflowMenuButtons: ['quality', 'picture_in_picture', 'cast', 'captions', 'language']
+    });
+
+    setupAutoPip(video); // NEW
+
+    shaka.polyfill.installAll();
+    player.addEventListener('error', onErrorEvent);
+    controls.addEventListener('error', onErrorEvent);
+
+    const channel = sessionStorage.getItem('c');
+    let key = sessionStorage.getItem('k');
+
+    while (typeof key === 'string') {
+      key = JSON.parse(key);
+    }
+
+    if (channel && key) {
+      manifestUri = channel + '&sessionId=' + guid();
+
+      player.configure({
+        abr: {
+          enabled: false
+        },
+        manifest: {
+          disableThumbnails: true
+        },
+        drm: {
+          clearKeys: key
+        }
+      });
+
+      try {
+        await player.load(manifestUri);
+        console.log('The video has now been loaded!');
+      } catch (error) {
+        onError(error);
+      }
+    } else {
+      console.error('No valid video data found in sessionStorage.');
+    }
+  }
+
+  if (window.top.location.hostname === window.location.hostname) {
+    document.addEventListener('shaka-ui-loaded', initPlayer);
+  }
+</script>
 </body>
 </html>
