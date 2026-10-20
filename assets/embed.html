@@ -56,6 +56,7 @@
     console.error('Error code', error.code, 'object', error);
   }
 
+  // NEW: open Picture-in-Picture automatically when the viewer tabs away
   function setupAutoPip(video) {
     if (!('mediaSession' in navigator)) return;
     try {
@@ -68,24 +69,28 @@
         }
       });
     } catch {
+      // this browser doesn't support the action; the PiP button still works
     }
   }
 
   async function initPlayer() {
     const video = document.getElementById('video');
     const container = document.querySelector('.video-container');
-    const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
+	const ui = video['ui'];
+	ui.configure({
+	  documentPictureInPicture: { enabled: false }
+	});
     const controls = ui.getControls();
     const player = controls.getPlayer();
 
     window.player = player;
     window.ui = ui;
 	
-	const ui = video['ui'];
 
 
+    // NEW: quality, picture-in-picture, and Chromecast in the overflow (⋮) menu
     ui.configure({
-      castReceiverAppId: '07AEE832',
+      castReceiverAppId: '07AEE832', // replace with your own receiver ID for production
       controlPanelElements: [
         'play_pause', 'time_and_duration', 'spacer',
         'mute', 'volume', 'fullscreen', 'overflow_menu'
@@ -93,7 +98,7 @@
       overflowMenuButtons: ['quality', 'picture_in_picture', 'cast', 'captions', 'language']
     });
 
-    setupAutoPip(video); 
+    setupAutoPip(video); // NEW
 
     shaka.polyfill.installAll();
     player.addEventListener('error', onErrorEvent);
