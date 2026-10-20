@@ -29,7 +29,6 @@
 	  font: 600 clamp(13px, 1.5vw, 18px)/1 system-ui, sans-serif;
 	  letter-spacing: 0.04em;
 	  cursor: pointer;
-	  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 	}
 	button:hover:not(:disabled) { color: #fff; }
 	button:disabled { opacity: 0.4; cursor: default; }
@@ -55,7 +54,7 @@
       <button data-region="sgp" title="Singapore" disabled>SGP</button>
     </nav>
 
-    <p id="status">Looking for stream…</p>
+    <p id="status">Loading...…</p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
