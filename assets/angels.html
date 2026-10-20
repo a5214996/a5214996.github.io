@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stream</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/5.2.12/controls.min.css">
   <style>
     html, body { height: 100%; margin: 0; }
     body { background: #000; color: #efeff1; font-family: system-ui, sans-serif; }
@@ -11,55 +12,28 @@
     .stage { position: relative; width: 100%; height: 100%; }
     video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
 
-	nav {
-	  position: absolute; left: 50%; bottom: max(64px, 12%);
-	  transform: translateX(-50%);
-	  display: flex; gap: clamp(6px, 1vw, 12px);
-	  opacity: 0; pointer-events: none; transition: opacity 0.2s;
-	}
-	.stage.online:hover nav,
-	.stage.online:focus-within nav { opacity: 1; pointer-events: auto; }
-
-	button {
-	  padding: clamp(8px, 1.4vw, 14px) clamp(12px, 2vw, 22px);
-	  border: 2px solid #26262c;
-	  border-radius: 6px;
-	  background: #26262c;
-	  color: #b5b5bd;
-	  font: 600 clamp(13px, 1.5vw, 18px)/1 system-ui, sans-serif;
-	  letter-spacing: 0.04em;
-	  cursor: pointer;
-	}
-	button:hover:not(:disabled) { color: #fff; }
-	button:disabled { opacity: 0.4; cursor: default; }
-	button[aria-pressed="true"] { color: #fff; border-color: #fff; }
-
     #status {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-      margin: 0; padding: 16px; text-align: center; font-size: 16px; pointer-events: none;
-      text-shadow: 0 1px 4px #000;
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0; padding: 16px; text-align: center; font-size: 16px;
+      pointer-events: none; text-shadow: 0 1px 4px #000;
     }
     #status:empty { display: none; }
+
+    /* selected server in the menu */
+    .server-menu button[aria-selected="true"] span { font-weight: 700; }
+    .server-menu button[aria-selected="true"] span::after { content: " \2713"; }
   </style>
 </head>
 <body>
   <div class="stage" id="stage">
-    <video id="player" controls autoplay playsinline></video>
-
-    <nav>
-	  <button data-region="sfo" disabled>SFO</button>
-	  <button data-region="nyc" disabled>NYC</button>
-      <button data-region="ams" disabled>AMS</button>
-      <button data-region="fra" disabled>FRA</button>
-      <button data-region="sgp" disabled>SGP</button>
-    </nav>
-
-    <p id="status">Loading...…</p>
+    <video id="player" autoplay playsinline></video>
+    <p id="status">Loading…</p>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/5.2.12/shaka-player.ui.min.js"></script>
+  <script defer src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
   <script>
-
     const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
 
     const API_HOST = "api.angelthump.com";
@@ -70,14 +44,81 @@
       sfo: "sfo1.angelthump.com",
       sgp: "sgp1.angelthump.com",
     };
+    const REGIONS = [
+      ["sfo", "San Francisco"],
+      ["nyc", "New York"],
+      ["ams", "Amsterdam"],
+      ["fra", "Frankfurt"],
+      ["sgp", "Singapore"],
+    ];
 
     const stage = document.getElementById("stage");
     const video = document.getElementById("player");
     const statusEl = document.getElementById("status");
-    const buttons = [...document.querySelectorAll("[data-region]")];
-    let hls = null;
+    let player = null;
     let sessionId = null;
+    window.currentRegion = "";
 
+    // ---- Server entry in Shaka's overflow (⋮) menu ----------------------
+    const SERVER_ICON =
+      "M160-160v-240h640v240H160ZM240-240h80v-80h-80v80ZM160-560v-240h640v240H160ZM240-640h80v-80h-80v80Z";
+
+    class ServerMenu extends shaka.ui.SettingsMenu {
+      constructor(parent, controls) {
+        super(parent, controls, SERVER_ICON);
+        this.button.classList.add("server-button");
+        this.menu.classList.add("server-menu");
+
+        this.items_ = new Map();
+        for (const [region, label] of REGIONS) {
+          const button = document.createElement("button");
+          button.type = "button";
+          const span = document.createElement("span");
+          span.textContent = `${region.toUpperCase()} · ${label}`;
+          button.appendChild(span);
+          this.menu.appendChild(button);
+          this.items_.set(region, { button });
+          this.eventManager.listen(button, "click", () => this.choose_(region));
+        }
+
+        this.eventManager.listen(document, "server-changed", () => this.refresh_());
+        this.updateLocalizedStrings();
+        this.refresh_();
+      }
+
+      updateLocalizedStrings() {
+        this.button.ariaLabel = "Server";
+        this.nameSpan.textContent = "Server";
+        this.backSpan.textContent = "Server";
+        this.backButton.ariaLabel = "Back";
+      }
+
+      choose_(region) {
+        window.playRegion(region);
+        if (typeof this.controls.hideSettingsMenus === "function") {
+          this.controls.hideSettingsMenus();
+        }
+      }
+
+      refresh_() {
+        const current = window.currentRegion;
+        this.button.style.display = current ? "" : "none"; // hidden until the stream is online
+        for (const [region, { button }] of this.items_) {
+          if (region === current) button.setAttribute("aria-selected", "true");
+          else button.removeAttribute("aria-selected");
+        }
+        this.currentSelection.textContent = current ? current.toUpperCase() : "";
+      }
+    }
+
+    ServerMenu.Factory = class {
+      create(rootElement, controls) {
+        return new ServerMenu(rootElement, controls);
+      }
+    };
+    shaka.ui.OverflowMenu.registerElement("server", new ServerMenu.Factory());
+
+    // ---- Stream lookup ---------------------------------------------------
     async function loadChannel() {
       const res = await fetch(CONFIG_URL, { cache: "no-store" });
       if (!res.ok) throw new Error(`video.json returned ${res.status}`);
@@ -99,41 +140,55 @@
       return `${btoa(stream.createdAt + username)}_${username}`;
     }
 
-	function startPlayback() {
-	  video.play().catch(() => {
-		video.muted = true;
-		video.play().catch(() => {});
-	  });
-	}
+    // ---- Playback --------------------------------------------------------
+    function startPlayback() {
+      video.play().catch(() => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
 
-	function play(region) {
-	  const url = `https://${EDGES[region]}/hls/${sessionId}/index.m3u8`;
+    async function playRegion(region) {
+      if (!sessionId || !EDGES[region]) return;
+      window.currentRegion = region;
+      localStorage.setItem("region", region);
+      document.dispatchEvent(new Event("server-changed"));
+      statusEl.textContent = "";
 
-	  buttons.forEach((b) =>
-		b.setAttribute("aria-pressed", String(b.dataset.region === region))
-	  );
-	  localStorage.setItem("region", region);
-	  statusEl.textContent = "";
+      const url = `https://${EDGES[region]}/hls/${sessionId}/index.m3u8`;
+      try {
+        await player.load(url);
+        startPlayback();
+      } catch (err) {
+        if (err && err.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return; // switched again
+        console.error("Load failed", err);
+        statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
+      }
+    }
+    window.playRegion = playRegion;
 
-	  if (hls) { hls.destroy(); hls = null; }
+    // ---- Startup ---------------------------------------------------------
+    async function main() {
+      shaka.polyfill.installAll();
+      if (!shaka.Player.isBrowserSupported()) {
+        statusEl.textContent = "This browser can't play this stream.";
+        return;
+      }
 
-	  if (window.Hls && Hls.isSupported()) {
-		hls = new Hls();
-		hls.loadSource(url);
-		hls.attachMedia(video);
-		hls.on(Hls.Events.MANIFEST_PARSED, startPlayback);
-		hls.on(Hls.Events.ERROR, (_e, data) => {
-		  if (data.fatal) statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
-		});
-	  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-		video.src = url;
-		startPlayback();
-	  } else {
-		statusEl.textContent = "This browser can't play HLS.";
-	  }
-	}
+      player = new shaka.Player();
+      await player.attach(video);
 
-    (async () => {
+      const ui = new shaka.ui.Overlay(player, stage, video);
+      ui.configure({
+        castReceiverAppId: "07AEE832", // Shaka's demo receiver; replace with your own for production
+        controlPanelElements: [
+          "play_pause", "time_and_duration", "spacer",
+          "mute", "volume", "fullscreen", "overflow_menu",
+        ],
+        overflowMenuButtons: ["server", "quality", "cast", "remote"],
+      });
+      player.addEventListener("error", (e) => console.error("Player error", e.detail));
+
       let channel;
       try {
         channel = await loadChannel();
@@ -153,14 +208,11 @@
         return;
       }
 
-      stage.classList.add("online");
-      buttons.forEach((b) => {
-        b.disabled = false;
-        b.addEventListener("click", () => play(b.dataset.region));
-      });
       const saved = localStorage.getItem("region");
-      play(EDGES[saved] ? saved : "sfo");
-    })();
+      playRegion(EDGES[saved] ? saved : "sfo");
+    }
+
+    window.addEventListener("DOMContentLoaded", main);
   </script>
 </body>
 </html>
