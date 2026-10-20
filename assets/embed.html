@@ -82,9 +82,6 @@
     window.ui = ui;
 	
 	const ui = video['ui'];
-	ui.configure({
-	  documentPictureInPicture: { enabled: false }
-	});
 
 
     ui.configure({
@@ -96,7 +93,7 @@
       overflowMenuButtons: ['quality', 'picture_in_picture', 'cast', 'captions', 'language']
     });
 
-    setupAutoPip(video);
+    setupAutoPip(video); 
 
     shaka.polyfill.installAll();
     player.addEventListener('error', onErrorEvent);
