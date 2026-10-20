@@ -32,64 +32,54 @@
 <body>
 
   <div class="video-container">
-    <video id="video" class="shaka-video" autoplay playsinline></video>
+    <video id="video" class="shaka-video"></video>
   </div>
   
-	<script src="/assets/shaka-player.ui.js"></script>
-	<script>
-	  function guid() {
-		function _p8(s) {
-		  var p = (Math.random().toString(16) + "000000000").substr(2, 8);
-		  return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
-		}
-		return _p8() + _p8(true) + _p8(true) + _p8();
+  <script src="/assets/shaka-player.ui.js"></script>
+  <script>
+    function guid() {
+      function _p8(s) {
+        var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+        return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+      }
+      return _p8() + _p8(true) + _p8(true) + _p8();
+    }
+
+    function onErrorEvent(event) {
+      onError(event.detail);
+    }
+
+    function onError(error) {
+      console.error('Error code', error.code, 'object', error);
+    }
+
+    async function initPlayer() {
+      const video = document.getElementById('video');
+      const container = document.querySelector('.video-container');
+      const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
+      const controls = ui.getControls();
+      const player = controls.getPlayer();
+
+      window.player = player;
+      window.ui = ui;
+
+      shaka.polyfill.installAll();
+      player.addEventListener('error', onErrorEvent);
+      controls.addEventListener('error', onErrorEvent);
+
+      const channel = sessionStorage.getItem('c');
+	  let key = sessionStorage.getItem('k');
+
+	  while (typeof key === 'string') {
+	    key = JSON.parse(key);
 	  }
+	  
+      if (channel && key) {
+        manifestUri = channel + '&sessionId=' + guid();
 
-	  function onErrorEvent(event) {
-		onError(event.detail);
-	  }
-
-	  function onError(error) {
-		console.error('Error code', error.code, 'object', error);
-	  }
-
-	  async function startPlayback(video) {
-		try {
-		  await video.play();
-		} catch {
-		  video.muted = true; // muted autoplay is always allowed
-		  try { await video.play(); } catch {}
-		}
-	  }
-
-	  async function initPlayer() {
-		shaka.polyfill.installAll();
-
-		const video = document.getElementById('video');
-		const container = document.querySelector('.video-container');
-		const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
-		const controls = ui.getControls();
-		const player = controls.getPlayer();
-
-		window.player = player;
-		window.ui = ui;
-
-		player.addEventListener('error', onErrorEvent);
-		controls.addEventListener('error', onErrorEvent);
-
-		const channel = sessionStorage.getItem('c');
-		let key = sessionStorage.getItem('k');
-
-		while (typeof key === 'string') {
-		  key = JSON.parse(key);
-		}
-
-		if (channel && key) {
-		  const manifestUri = channel + '&sessionId=' + guid();
-
-		  player.configure({
+		player.configure({
 			abr: {
-			  enabled: false
+				enabled: false
 			},
 			manifest: {
 			  disableThumbnails: true
@@ -97,23 +87,23 @@
 			drm: {
 			  clearKeys: key
 			}
-		  });
+		});
 
-		  try {
-			await player.load(manifestUri);
-			console.log('The video has now been loaded!');
-			startPlayback(video);
-		  } catch (error) {
-			onError(error);
-		  }
-		} else {
-		  console.error('No valid video data found in sessionStorage.');
-		}
-	  }
-
-	  if (window.top.location.hostname === window.location.hostname) {
+        try {
+          await player.load(manifestUri);
+          console.log('The video has now been loaded!');
+        } catch (error) {
+          onError(error);
+        }
+      } else {
+        console.error('No valid video data found in sessionStorage.');
+      }
+    }
+	
+    if (window.top.location.hostname === window.location.hostname) {
 		document.addEventListener('shaka-ui-loaded', initPlayer);
-	  }
-	</script>
+	}
+
+  </script>
 </body>
 </html>
