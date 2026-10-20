@@ -76,17 +76,12 @@
   async function initPlayer() {
     const video = document.getElementById('video');
     const container = document.querySelector('.video-container');
-	const ui = video['ui'];
-	ui.configure({
-	  documentPictureInPicture: { enabled: false }
-	});
+    const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
     const controls = ui.getControls();
     const player = controls.getPlayer();
 
     window.player = player;
     window.ui = ui;
-	
-
 
     // NEW: quality, picture-in-picture, and Chromecast in the overflow (⋮) menu
     ui.configure({
