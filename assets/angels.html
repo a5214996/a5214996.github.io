@@ -11,18 +11,17 @@
     .stage { position: relative; width: 100%; height: 100%; }
     video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
 
-    nav {
-      position: absolute; top: 0; left: 0; right: 0;
-      display: flex; gap: 8px; padding: 8px;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), transparent);
-      opacity: 0; pointer-events: none; transition: opacity 0.2s;
-    }
-    .stage.online:hover nav,
-    .stage.online:focus-within nav { opacity: 1; pointer-events: auto; }
+	nav {
+	  position: absolute; left: 50%; bottom: 64px;
+	  transform: translateX(-50%);
+	  display: flex; gap: 8px; padding: 6px;
+	  border-radius: 8px; background: rgba(0, 0, 0, 0.55);
+	  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+	}
+	.stage.online:hover nav,
+	.stage.online:focus-within nav { opacity: 1; pointer-events: auto; }
 
-    button { padding: 6px 12px; border: 0; border-radius: 4px; background: #26262c; color: inherit; cursor: pointer; }
-    button:disabled { opacity: 0.4; cursor: default; }
-    button[aria-pressed="true"] { background: #9147ff; }
+	button[aria-pressed="true"] { box-shadow: inset 0 0 0 2px #fff; }
 
     #status {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -49,7 +48,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
   <script>
-    // resolves relative to the page that embeds this iframe (the index)
+
     const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
 
     const API_HOST = "api.angelthump.com";
@@ -109,7 +108,7 @@
           if (data.fatal) statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
         });
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = url; // native HLS (Safari)
+        video.src = url;
         video.play().catch(() => {});
       } else {
         statusEl.textContent = "This browser can't play HLS.";
@@ -136,13 +135,13 @@
         return;
       }
 
-      stage.classList.add("online"); // lets the buttons appear on hover
+      stage.classList.add("online");
       buttons.forEach((b) => {
         b.disabled = false;
         b.addEventListener("click", () => play(b.dataset.region));
       });
       const saved = localStorage.getItem("region");
-      play(EDGES[saved] ? saved : "ams");
+      play(EDGES[saved] ? saved : "sfo");
     })();
   </script>
 </body>
