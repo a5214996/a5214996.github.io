@@ -5,29 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stream</title>
   <style>
-    body { margin: 0; background: #0e0e10; color: #efeff1; font-family: system-ui, sans-serif; }
-    nav { display: flex; gap: 8px; padding: 8px; }
+    html, body { height: 100%; margin: 0; }
+    body { background: #000; color: #efeff1; font-family: system-ui, sans-serif; }
+
+    .stage { position: relative; width: 100%; height: 100%; }
+    video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+    nav {
+      position: absolute; top: 0; left: 0; right: 0;
+      display: flex; gap: 8px; padding: 8px;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), transparent);
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .stage.online:hover nav,
+    .stage.online:focus-within nav { opacity: 1; pointer-events: auto; }
+
     button { padding: 6px 12px; border: 0; border-radius: 4px; background: #26262c; color: inherit; cursor: pointer; }
     button:disabled { opacity: 0.4; cursor: default; }
     button[aria-pressed="true"] { background: #9147ff; }
-    #status { margin: 0 8px 8px; font-size: 14px; }
-    video { display: block; width: 100%; max-height: calc(100vh - 90px); background: #000; }
+
+    #status {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      margin: 0; padding: 16px; text-align: center; font-size: 16px; pointer-events: none;
+      text-shadow: 0 1px 4px #000;
+    }
+    #status:empty { display: none; }
   </style>
 </head>
 <body>
-  <nav>
-    <button data-region="ams" title="Amsterdam" disabled>AMS</button>
-    <button data-region="fra" title="Frankfurt" disabled>FRA</button>
-    <button data-region="nyc" title="New York" disabled>NYC</button>
-    <button data-region="sfo" title="San Francisco" disabled>SFO</button>
-    <button data-region="sgp" title="Singapore" disabled>SGP</button>
-  </nav>
-  <p id="status">Looking for stream…</p>
-  <video id="player" controls autoplay playsinline></video>
+  <div class="stage" id="stage">
+    <video id="player" controls autoplay playsinline></video>
+
+    <nav>
+      <button data-region="ams" title="Amsterdam" disabled>AMS</button>
+      <button data-region="fra" title="Frankfurt" disabled>FRA</button>
+      <button data-region="nyc" title="New York" disabled>NYC</button>
+      <button data-region="sfo" title="San Francisco" disabled>SFO</button>
+      <button data-region="sgp" title="Singapore" disabled>SGP</button>
+    </nav>
+
+    <p id="status">Looking for stream…</p>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
   <script>
+    // resolves relative to the page that embeds this iframe (the index)
     const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
+
+    const API_HOST = "api.angelthump.com";
     const EDGES = {
       ams: "ams1.angelthump.com",
       fra: "fra1.angelthump.com",
@@ -36,6 +61,7 @@
       sgp: "sgp1.angelthump.com",
     };
 
+    const stage = document.getElementById("stage");
     const video = document.getElementById("player");
     const statusEl = document.getElementById("status");
     const buttons = [...document.querySelectorAll("[data-region]")];
@@ -53,9 +79,9 @@
 
     async function findSessionId(channel) {
       const res = await fetch(
-        `https://api.angelthump.com/v3/streams?username=${encodeURIComponent(channel)}`
+        `https://${API_HOST}/v3/streams?username=${encodeURIComponent(channel)}`
       );
-      if (!res.ok) throw new Error(`AngelThump returned ${res.status}`);
+      if (!res.ok) throw new Error(`Lookup returned ${res.status}`);
       const streams = await res.json();
       const stream = streams.find((s) => s.type === "live");
       if (!stream) return null;
@@ -83,7 +109,7 @@
           if (data.fatal) statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
         });
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-        video.src = url;
+        video.src = url; // native HLS (Safari)
         video.play().catch(() => {});
       } else {
         statusEl.textContent = "This browser can't play HLS.";
@@ -102,14 +128,15 @@
       try {
         sessionId = await findSessionId(channel);
       } catch {
-        statusEl.textContent = "Couldn't reach AngelThump.";
+        statusEl.textContent = "Couldn't reach the stream service.";
         return;
       }
       if (!sessionId) {
-        statusEl.textContent = `${channel} is offline.`;
+        statusEl.textContent = "Stream is offline.";
         return;
       }
 
+      stage.classList.add("online"); // lets the buttons appear on hover
       buttons.forEach((b) => {
         b.disabled = false;
         b.addEventListener("click", () => play(b.dataset.region));
