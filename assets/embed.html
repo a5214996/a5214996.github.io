@@ -56,23 +56,6 @@
     console.error('Error code', error.code, 'object', error);
   }
 
-  // NEW: open Picture-in-Picture automatically when the viewer tabs away
-  function setupAutoPip(video) {
-    if (!('mediaSession' in navigator)) return;
-    try {
-      navigator.mediaSession.setActionHandler('enterpictureinpicture', async () => {
-        if (document.pictureInPictureElement) return;
-        try {
-          await video.requestPictureInPicture();
-        } catch (err) {
-          console.warn('Auto PiP failed:', err.name, err.message);
-        }
-      });
-    } catch {
-      // this browser doesn't support the action; the PiP button still works
-    }
-  }
-
   async function initPlayer() {
     const video = document.getElementById('video');
     const container = document.querySelector('.video-container');
@@ -83,17 +66,16 @@
     window.player = player;
     window.ui = ui;
 
-    // NEW: quality, picture-in-picture, and Chromecast in the overflow (⋮) menu
+    video.disablePictureInPicture = true; // optional: blocks PiP on the video element
+
     ui.configure({
       castReceiverAppId: '07AEE832', // replace with your own receiver ID for production
       controlPanelElements: [
         'play_pause', 'time_and_duration', 'spacer',
         'mute', 'volume', 'fullscreen', 'overflow_menu'
       ],
-      overflowMenuButtons: ['quality', 'picture_in_picture', 'cast', 'captions', 'language']
+      overflowMenuButtons: ['quality', 'cast', 'captions', 'language']
     });
-
-    setupAutoPip(video); // NEW
 
     shaka.polyfill.installAll();
     player.addEventListener('error', onErrorEvent);
