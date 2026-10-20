@@ -182,10 +182,9 @@
       ui.configure({
         castReceiverAppId: "07AEE832", // Shaka's demo receiver; replace with your own for production
         controlPanelElements: [
-          "play_pause", "time_and_duration", "spacer",
-          "mute", "volume", "fullscreen", "overflow_menu",
+          "play_pause", "time_and_duration", "mute", "volume", "spacer",
+          "server", "cast" "picture_in_picture", "fullscreen"
         ],
-        overflowMenuButtons: ["server", "quality", "cast", "remote"],
       });
       player.addEventListener("error", (e) => console.error("Player error", e.detail));
 

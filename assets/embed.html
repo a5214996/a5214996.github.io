@@ -66,15 +66,13 @@
     window.player = player;
     window.ui = ui;
 
-    video.disablePictureInPicture = true; // optional: blocks PiP on the video element
-
     ui.configure({
-      castReceiverAppId: '07AEE832', // replace with your own receiver ID for production
+      castReceiverAppId: '07AEE832', 
       controlPanelElements: [
-        'play_pause', 'time_and_duration', 'spacer',
-        'mute', 'volume', 'fullscreen', 'overflow_menu'
+        'play_pause', 'time_and_duration', 'spacer', 'mute', 'volume',
+		'overflow_menu','quality', 'cast', 'fullscreen'
       ],
-      overflowMenuButtons: ['quality', 'cast', 'captions', 'language']
+      overflowMenuButtons: ['captions', 'language']
     });
 
     shaka.polyfill.installAll();
