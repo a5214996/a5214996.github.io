@@ -27,7 +27,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
   <script>
-    const CONFIG_URL = "video.json";
+    const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     const EDGES = {
       ams: "ams1.angelthump.com",
       fra: "fra1.angelthump.com",
