@@ -193,7 +193,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
       try {
         channel = await loadChannel();
       } catch {
-        statusEl.textContent = "Couldn't read video.json.";
+        statusEl.textContent = "Couldn't read file";
         return;
       }
 
