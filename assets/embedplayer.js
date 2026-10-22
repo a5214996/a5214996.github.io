@@ -1,4 +1,4 @@
-  function guid() {
+function guid() {
     function _p8(s) {
       var p = (Math.random().toString(16) + "000000000").substr(2, 8);
       return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
@@ -79,9 +79,13 @@
   }
 
 
+  // Shaka 5.x expects SVG path data (24x24 viewBox) here, not a Material Icons name.
+  // This is the Material "live_tv" icon.
+  const FEED_ICON_PATH = 'M21 6h-7.59l3.29-3.29L16 2l-4 4-4-4-.71.71L10.59 6H3c-1.1 0-2 .89-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.11-.9-2-2-2zm0 14H3V8h18v12zM9 10v8l7-4z';
+
   class FeedSelection extends shaka.ui.SettingsMenu {
     constructor(parent, controls) {
-      super(parent, controls, 'live_tv'); 
+      super(parent, controls, FEED_ICON_PATH);
       this.button.classList.add('feed-selection-button');
       this.menu.classList.add('feed-selection');
       this.button.setAttribute('aria-label', 'Feed');
@@ -128,9 +132,12 @@
 
     const video = document.getElementById('video');
     const container = document.querySelector('.video-container');
-    const ui = new shaka.ui.Overlay(new shaka.Player(video), container, video);
+    // Create the player first, then attach the media element (passing the element
+    // to the Player constructor is deprecated).
+    const player = new shaka.Player();
+    await player.attach(video);
+    const ui = new shaka.ui.Overlay(player, container, video);
     const controls = ui.getControls();
-    const player = controls.getPlayer();
 
     window.player = player;
     window.ui = ui;
@@ -165,9 +172,9 @@
         }
       });
 
+	  // Loading
       try {
         await loadFeed(player, feeds[current]);
-        console.log('The video has now been loaded!');
       } catch (error) {
         onError(error);
       }
