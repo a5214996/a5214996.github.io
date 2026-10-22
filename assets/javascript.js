@@ -3,16 +3,12 @@
     const streams = res.streams ||
       (res.channel ? [{ label: 'Feed 1', channel: res.channel, keys: res.keys }] : []);
     if (!streams.length) return;
-    if (res.start && res.start !== Number(sessionStorage.getItem('st')))
-	{
-		refresh = true;
-	}
+
     const first = streams[0];
     const c = sessionStorage.getItem('c');
     if (refresh || first.channel !== c) {
       setPlayer(res.host, first.channel, res.urlparam);
       sessionStorage.setItem('c', first.channel);
-      if (res.start != null) sessionStorage.setItem('st', res.start);
       if (first.keys) sessionStorage.setItem('k', JSON.stringify(first.keys));
       sessionStorage.setItem('s', JSON.stringify(streams));
       sessionStorage.setItem('i', '0');
