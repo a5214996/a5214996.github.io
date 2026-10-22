@@ -23,7 +23,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     let sessionId = null;
     window.currentRegion = "";
 
-    // ---- Server entry in Shaka's overflow (⋮) menu ----------------------
+    // ---- Server menu ----------------------------------------------------
     const SERVER_ICON =
       "M160-160v-240h640v240H160ZM240-240h80v-80h-80v80ZM160-560v-240h640v240H160ZM240-640h80v-80h-80v80Z";
 
@@ -66,7 +66,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
 
       refresh_() {
         const current = window.currentRegion;
-        this.button.style.display = current ? "" : "none"; // hidden until the stream is online
+        this.button.style.display = current ? "" : "none";
         for (const [region, { button }] of this.items_) {
           if (region === current) button.setAttribute("aria-selected", "true");
           else button.removeAttribute("aria-selected");
@@ -82,7 +82,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     };
     shaka.ui.OverflowMenu.registerElement("server", new ServerMenu.Factory());
 
-    // ---- Stream lookup ---------------------------------------------------
+    // ---- Video lookup ---------------------------------------------------
     async function loadChannel() {
       const res = await fetch(CONFIG_URL, { cache: "no-store" });
       if (!res.ok) throw new Error(`video.json returned ${res.status}`);
@@ -131,7 +131,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     }
     window.playRegion = playRegion;
 
-    // ---- Refresh when a stream that WAS playing goes offline --------------
+    // ---- Reconnect -----------------------------------------------------
 	const MAX_REFRESHES = 20;
 	let refreshCount = 0;
 
@@ -151,7 +151,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     async function main() {
       shaka.polyfill.installAll();
       if (!shaka.Player.isBrowserSupported()) {
-        statusEl.textContent = "This browser can't play this stream.";
+        statusEl.textContent = "This browser can't play this video.";
         return;
       }
 
@@ -188,11 +188,11 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
       try {
         sessionId = await findSessionId(channel);
       } catch {
-        statusEl.textContent = "Couldn't reach the host.";
+        statusEl.textContent = "Couldn't reach host.";
         return;
       }
       if (!sessionId) {
-        statusEl.textContent = "Stream not found. Refresh to try again";
+        statusEl.textContent = "Video not found. Refresh to try again";
         return;
       }
 
