@@ -78,10 +78,7 @@ function guid() {
     }
   }
 
-
-  // Shaka 5.x expects SVG path data (24x24 viewBox) here, not a Material Icons name.
-  // This is the Material "live_tv" icon.
-  const FEED_ICON_PATH = 'M21 6h-7.59l3.29-3.29L16 2l-4 4-4-4-.71.71L10.59 6H3c-1.1 0-2 .89-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.11-.9-2-2-2zm0 14H3V8h18v12zM9 10v8l7-4z';
+  const FEED_ICON_PATH = 'M80-200v-560h800v560H80ZM160-280h640v-400H160v400ZM400-360v-240l200 120-200 120Z';
 
   class FeedSelection extends shaka.ui.SettingsMenu {
     constructor(parent, controls) {
@@ -132,8 +129,7 @@ function guid() {
 
     const video = document.getElementById('video');
     const container = document.querySelector('.video-container');
-    // Create the player first, then attach the media element (passing the element
-    // to the Player constructor is deprecated).
+
     const player = new shaka.Player();
     await player.attach(video);
     const ui = new shaka.ui.Overlay(player, container, video);
@@ -142,7 +138,7 @@ function guid() {
     window.player = player;
     window.ui = ui;
 
-    // Audio re-sync after ad splices (defined in /assets/audio-resync.js)
+    // Audio re-sync after ad splices
     if (typeof initAudioResync === 'function') {
       initAudioResync(video, player);
     } else {
@@ -172,9 +168,9 @@ function guid() {
         }
       });
 
-	  // Loading
       try {
         await loadFeed(player, feeds[current]);
+        console.log('The video has now been loaded!');
       } catch (error) {
         onError(error);
       }
