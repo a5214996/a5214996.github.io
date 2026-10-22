@@ -132,18 +132,34 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     window.playRegion = playRegion;
 
     // ---- Refresh when a stream that WAS playing goes offline --------------
-    function callRefreshVideo() {
-      try {
-        if (typeof refreshVideo === "function") return refreshVideo();
-        if (window.parent && typeof window.parent.refreshVideo === "function") {
-          return window.parent.refreshVideo();
-        }
-      } catch (err) {
-        console.error("refreshVideo() failed", err);
-        return;
-      }
-      console.warn("refreshVideo() not found");
-    }
+	function callRefreshVideo() {
+	  let parentType;
+	  try {
+		parentType = typeof window.parent.refreshVideo;
+	  } catch (err) {
+		parentType = `blocked (${err.name})`; // cross-origin parent would land here
+	  }
+	  console.log("[diag] callRefreshVideo fired", {
+		local: typeof refreshVideo,
+		parent: parentType,
+		sameWindowAsParent: window.parent === window,
+	  });
+
+	  try {
+		if (typeof refreshVideo === "function") {
+		  console.log("[diag] calling local refreshVideo");
+		  return refreshVideo();
+		}
+		if (window.parent && typeof window.parent.refreshVideo === "function") {
+		  console.log("[diag] calling parent.refreshVideo");
+		  return window.parent.refreshVideo();
+		}
+	  } catch (err) {
+		console.error("[diag] refreshVideo() threw", err);
+		return;
+	  }
+	  console.warn("[diag] refreshVideo() not found");
+	}
 
     // ---- Startup ---------------------------------------------------------
     async function main() {
@@ -165,14 +181,26 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
         ],
 		overflowMenuButtons: ["server"]
       });
-      let wasPlaying = false;
-      video.addEventListener("playing", () => { wasPlaying = true; });
-      player.addEventListener("error", (e) => {
-        console.error("Player error", e.detail);
-        if (!wasPlaying || (e.detail && e.detail.code === shaka.util.Error.Code.LOAD_INTERRUPTED)) return;
-        wasPlaying = false;     // once per drop; the next "playing" event re-arms it
-        callRefreshVideo();
-      });
+	let wasPlaying = false;
+	video.addEventListener("playing", () => {
+	  wasPlaying = true;
+	  console.log("[diag] playing, wasPlaying = true");
+	});
+	video.addEventListener("ended",   () => console.log("[diag] video ended"));
+	video.addEventListener("waiting", () => console.log("[diag] video waiting"));
+	video.addEventListener("stalled", () => console.log("[diag] video stalled"));
+
+	player.addEventListener("error", (e) => {
+	  const code = e.detail && e.detail.code;
+	  console.log("[diag] shaka error", { code, wasPlaying, detail: e.detail });
+	  console.error("Player error", e.detail);
+	  if (!wasPlaying || code === shaka.util.Error.Code.LOAD_INTERRUPTED) {
+		console.log("[diag] error ignored by guard");
+		return;
+	  }
+	  wasPlaying = false;
+	  callRefreshVideo();
+	});
 
       let channel;
       try {
