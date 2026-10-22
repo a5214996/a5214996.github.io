@@ -126,7 +126,20 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
       } catch (err) {
         if (err && err.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return; // switched again
         console.error("Load failed", err);
-        statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
+
+        const E = shaka.util.Error.Code;
+        const status = err && err.code === E.BAD_HTTP_STATUS && err.data ? err.data[1] : null;
+
+        if (status === 404) {
+          // Stream/session is gone: show it, then hand off to the refresh logic
+          statusEl.textContent = `${region.toUpperCase()}: Reconnecting...`;
+          callRefreshVideo();
+          return;
+        }
+
+        if (status) statusEl.textContent = `${region.toUpperCase()}: server returned ${status}`;
+        else if (err && err.code === E.HTTP_ERROR) statusEl.textContent = `${region.toUpperCase()}: couldn't reach server`;
+        else statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
       }
     }
     window.playRegion = playRegion;
@@ -191,7 +204,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
         return;
       }
       if (!sessionId) {
-        statusEl.textContent = "Stream not found. Refresh to look again";
+        statusEl.textContent = "Stream not found. Refresh video to try again";
         return;
       }
 
