@@ -33,238 +33,186 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/5.2.12/shaka-player.ui.min.js"></script>
   <script defer src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
-  <script>
-	const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
+ <script>
+    const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
 
-	const API_HOST = "api.angelthump.com";
-	const EDGES = {
-	  ams: "ams1.angelthump.com",
-	  fra: "fra1.angelthump.com",
-	  nyc: "nyc1.angelthump.com",
-	  sfo: "sfo1.angelthump.com",
-	  sgp: "sgp1.angelthump.com",
-	};
-	const REGIONS = [
-	  ["sfo", "San Francisco"],
-	  ["nyc", "New York"],
-	  ["ams", "Amsterdam"],
-	  ["fra", "Frankfurt"],
-	  ["sgp", "Singapore"],
-	];
+    const API_HOST = "api.angelthump.com";
+    const EDGES = {
+      ams: "ams1.angelthump.com",
+      fra: "fra1.angelthump.com",
+      nyc: "nyc1.angelthump.com",
+      sfo: "sfo1.angelthump.com",
+      sgp: "sgp1.angelthump.com",
+    };
+    const REGIONS = [
+      ["sfo", "San Francisco"],
+      ["nyc", "New York"],
+      ["ams", "Amsterdam"],
+      ["fra", "Frankfurt"],
+      ["sgp", "Singapore"],
+    ];
 
-	// Auto-recovery timing (only used while the stream is broken)
-	const FIRST_RETRY_MS = 3000;   // first retry after a failure
-	const MAX_RETRY_MS = 30000;    // retries back off 3s, 6s, 12s, 24s, then every 30s
-	const STALL_MS = 15000;        // buffering this long with no data counts as a failure
+    const stage = document.getElementById("stage");
+    const video = document.getElementById("player");
+    const statusEl = document.getElementById("status");
+    let player = null;
+    let sessionId = null;
+    window.currentRegion = "";
 
-	const stage = document.getElementById("stage");
-	const video = document.getElementById("player");
-	const statusEl = document.getElementById("status");
-	let player = null;
-	let channel = null;
-	let sessionId;          // undefined = not checked yet, null = offline
-	window.currentRegion = "";
+    // ---- Server entry in Shaka's overflow (⋮) menu ----------------------
+    const SERVER_ICON =
+      "M160-160v-240h640v240H160ZM240-240h80v-80h-80v80ZM160-560v-240h640v240H160ZM240-640h80v-80h-80v80Z";
 
-	// ---- Server entry in Shaka's overflow (⋮) menu ----------------------
-	const SERVER_ICON =
-	  "M160-160v-240h640v240H160ZM240-240h80v-80h-80v80ZM160-560v-240h640v240H160ZM240-640h80v-80h-80v80Z";
+    class ServerMenu extends shaka.ui.SettingsMenu {
+      constructor(parent, controls) {
+        super(parent, controls, SERVER_ICON);
+        this.button.classList.add("server-button");
+        this.menu.classList.add("server-menu");
 
-	class ServerMenu extends shaka.ui.SettingsMenu {
-	  constructor(parent, controls) {
-		super(parent, controls, SERVER_ICON);
-		this.button.classList.add("server-button");
-		this.menu.classList.add("server-menu");
+        this.items_ = new Map();
+        for (const [region, label] of REGIONS) {
+          const button = document.createElement("button");
+          button.type = "button";
+          const span = document.createElement("span");
+          span.textContent = `${region.toUpperCase()} · ${label}`;
+          button.appendChild(span);
+          this.menu.appendChild(button);
+          this.items_.set(region, { button });
+          this.eventManager.listen(button, "click", () => this.choose_(region));
+        }
 
-		this.items_ = new Map();
-		for (const [region, label] of REGIONS) {
-		  const button = document.createElement("button");
-		  button.type = "button";
-		  const span = document.createElement("span");
-		  span.textContent = `${region.toUpperCase()} · ${label}`;
-		  button.appendChild(span);
-		  this.menu.appendChild(button);
-		  this.items_.set(region, { button });
-		  this.eventManager.listen(button, "click", () => this.choose_(region));
-		}
+        this.eventManager.listen(document, "server-changed", () => this.refresh_());
+        this.updateLocalizedStrings();
+        this.refresh_();
+      }
 
-		this.eventManager.listen(document, "server-changed", () => this.refresh_());
-		this.updateLocalizedStrings();
-		this.refresh_();
-	  }
+      updateLocalizedStrings() {
+        this.button.ariaLabel = "Server";
+        this.nameSpan.textContent = "Server";
+        this.backSpan.textContent = "Server";
+        this.backButton.ariaLabel = "Back";
+      }
 
-	  updateLocalizedStrings() {
-		this.button.ariaLabel = "Server";
-		this.nameSpan.textContent = "Server";
-		this.backSpan.textContent = "Server";
-		this.backButton.ariaLabel = "Back";
-	  }
+      choose_(region) {
+        window.playRegion(region);
+        if (typeof this.controls.hideSettingsMenus === "function") {
+          this.controls.hideSettingsMenus();
+        }
+      }
 
-	  choose_(region) {
-		window.playRegion(region);
-		if (typeof this.controls.hideSettingsMenus === "function") {
-		  this.controls.hideSettingsMenus();
-		}
-	  }
+      refresh_() {
+        const current = window.currentRegion;
+        this.button.style.display = current ? "" : "none"; // hidden until the stream is online
+        for (const [region, { button }] of this.items_) {
+          if (region === current) button.setAttribute("aria-selected", "true");
+          else button.removeAttribute("aria-selected");
+        }
+        this.currentSelection.textContent = current ? current.toUpperCase() : "";
+      }
+    }
 
-	  refresh_() {
-		const current = window.currentRegion;
-		this.button.style.display = current ? "" : "none"; // hidden until the stream is online
-		for (const [region, { button }] of this.items_) {
-		  if (region === current) button.setAttribute("aria-selected", "true");
-		  else button.removeAttribute("aria-selected");
-		}
-		this.currentSelection.textContent = current ? current.toUpperCase() : "";
-	  }
-	}
+    ServerMenu.Factory = class {
+      create(rootElement, controls) {
+        return new ServerMenu(rootElement, controls);
+      }
+    };
+    shaka.ui.OverflowMenu.registerElement("server", new ServerMenu.Factory());
 
-	ServerMenu.Factory = class {
-	  create(rootElement, controls) {
-		return new ServerMenu(rootElement, controls);
-	  }
-	};
-	shaka.ui.OverflowMenu.registerElement("server", new ServerMenu.Factory());
+    // ---- Stream lookup ---------------------------------------------------
+    async function loadChannel() {
+      const res = await fetch(CONFIG_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`video.json returned ${res.status}`);
+      const config = await res.json();
+      const channel = String(config.channel || "").trim().toLowerCase();
+      if (!/^[a-z0-9_]{1,32}$/.test(channel)) throw new Error("Bad channel in video.json");
+      return channel;
+    }
 
-	// ---- Stream lookup ---------------------------------------------------
-	async function loadChannel() {
-	  const res = await fetch(CONFIG_URL, { cache: "no-store" });
-	  if (!res.ok) throw new Error(`video.json returned ${res.status}`);
-	  const config = await res.json();
-	  const channel = String(config.channel || "").trim().toLowerCase();
-	  if (!/^[a-z0-9_]{1,32}$/.test(channel)) throw new Error("Bad channel in video.json");
-	  return channel;
-	}
+    async function findSessionId(channel) {
+      const res = await fetch(
+        `https://${API_HOST}/v3/streams?username=${encodeURIComponent(channel)}`
+      );
+      if (!res.ok) throw new Error(`Lookup returned ${res.status}`);
+      const streams = await res.json();
+      const stream = streams.find((s) => s.type === "live");
+      if (!stream) return null;
+      const username = stream.user.username;
+      return `${btoa(stream.createdAt + username)}_${username}`;
+    }
 
-	async function findSessionId(channel) {
-	  const res = await fetch(
-		`https://${API_HOST}/v3/streams?username=${encodeURIComponent(channel)}`
-	  );
-	  if (!res.ok) throw new Error(`Lookup returned ${res.status}`);
-	  const streams = await res.json();
-	  const stream = streams.find((s) => s.type === "live");
-	  if (!stream) return null;
-	  const username = stream.user.username;
-	  return `${btoa(stream.createdAt + username)}_${username}`;
-	}
+    // ---- Playback --------------------------------------------------------
+    function startPlayback() {
+      video.play().catch(() => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
 
-	// ---- Playback --------------------------------------------------------
-	function startPlayback() {
-	  video.play().catch(() => {
-		video.muted = true;
-		video.play().catch(() => {});
-	  });
-	}
+    async function playRegion(region) {
+      if (!sessionId || !EDGES[region]) return;
+      window.currentRegion = region;
+      localStorage.setItem("region", region);
+      document.dispatchEvent(new Event("server-changed"));
+      statusEl.textContent = "";
 
-	function pickRegion() {
-	  const saved = localStorage.getItem("region");
-	  return window.currentRegion || (EDGES[saved] ? saved : "sfo");
-	}
+      const url = `https://${EDGES[region]}/hls/${sessionId}/index.m3u8`;
+      try {
+        await player.load(url);
+        startPlayback();
+      } catch (err) {
+        if (err && err.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return; // switched again
+        console.error("Load failed", err);
+        statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
+      }
+    }
+    window.playRegion = playRegion;
 
-	// returns true if the stream loaded (or a newer load took over), false if it failed
-	async function playRegion(region) {
-	  if (!sessionId || !EDGES[region]) return false;
-	  window.currentRegion = region;
-	  localStorage.setItem("region", region);
-	  document.dispatchEvent(new Event("server-changed"));
-	  statusEl.textContent = "";
+    // ---- Startup ---------------------------------------------------------
+    async function main() {
+      shaka.polyfill.installAll();
+      if (!shaka.Player.isBrowserSupported()) {
+        statusEl.textContent = "This browser can't play this stream.";
+        return;
+      }
 
-	  const url = `https://${EDGES[region]}/hls/${sessionId}/index.m3u8`;
-	  try {
-		await player.load(url);
-		startPlayback();
-		return true;
-	  } catch (err) {
-		if (err && err.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return true; // switched again
-		console.error("Load failed", err);
-		statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
-		return false;
-	  }
-	}
-	window.playRegion = playRegion;
+      player = new shaka.Player();
+      await player.attach(video);
 
-	// ---- Auto-recovery ---------------------------------------------------
-	// When the stream stops or restarts, the player errors out or stalls. Reload the
-	// SAME url with the SAME session id (no API calls) and keep retrying with backoff
-	// until it plays again.
-	let recoverTimer = null;
-	let recoverAttempts = 0;
-
-	function scheduleRecover() {
-	  if (recoverTimer || !channel) return;
-	  const delay = Math.min(FIRST_RETRY_MS * 2 ** recoverAttempts, MAX_RETRY_MS);
-	  recoverAttempts++;
-	  recoverTimer = setTimeout(recover, delay);
-	}
-
-	async function recover() {
-	  recoverTimer = null;
-	  if (!sessionId) return;
-	  const ok = await playRegion(pickRegion());
-	  if (!ok) scheduleRecover();
-	}
-
-	// ---- Startup ---------------------------------------------------------
-	async function main() {
-	  shaka.polyfill.installAll();
-	  if (!shaka.Player.isBrowserSupported()) {
-		statusEl.textContent = "This browser can't play this stream.";
-		return;
-	  }
-
-	  player = new shaka.Player();
-	  await player.attach(video);
-
-	  const ui = new shaka.ui.Overlay(player, stage, video);
-	  ui.configure({
-		castReceiverAppId: "07AEE832",
-		controlPanelElements: [
-		  "play_pause", "mute", "volume", "time_and_duration", "spacer",
-		  "overflow_menu", "cast", "fullscreen"
-		],
+      const ui = new shaka.ui.Overlay(player, stage, video);
+      ui.configure({
+        castReceiverAppId: "07AEE832",
+        controlPanelElements: [
+          "play_pause", "mute", "volume", "time_and_duration", "spacer",
+          "overflow_menu", "cast", "fullscreen"
+        ],
 		overflowMenuButtons: ["server"]
-	  });
+      });
+      player.addEventListener("error", (e) => console.error("Player error", e.detail));
 
-	  // the stream stopped or errored: look it up again and reload
-	  player.addEventListener("error", (e) => {
-		console.error("Player error", e.detail);
-		if (e.detail && e.detail.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return;
-		scheduleRecover();
-	  });
+      let channel;
+      try {
+        channel = await loadChannel();
+      } catch {
+        statusEl.textContent = "Couldn't read video.json.";
+        return;
+      }
 
-	  // a dead stream can stall without raising an error, so also recover
-	  // if the player has been buffering for STALL_MS straight
-	  let stallTimer = null;
-	  player.addEventListener("buffering", (e) => {
-		clearTimeout(stallTimer);
-		if (e.buffering) stallTimer = setTimeout(scheduleRecover, STALL_MS);
-	  });
+      try {
+        sessionId = await findSessionId(channel);
+      } catch {
+        statusEl.textContent = "Couldn't reach the stream service.";
+        return;
+      }
+      if (!sessionId) {
+        statusEl.textContent = "Stream is offline.";
+        return;
+      }
 
-	  // playing again: start the retry backoff over for the next outage
-	  video.addEventListener("playing", () => { recoverAttempts = 0; });
+      const saved = localStorage.getItem("region");
+      playRegion(EDGES[saved] ? saved : "sfo");
+    }
 
-	  try {
-		channel = await loadChannel();
-	  } catch {
-		statusEl.textContent = "Couldn't read video.json.";
-		return;
-	  }
-
-	  // the only API call: find the session id once at startup
-	  try {
-		sessionId = await findSessionId(channel);
-	  } catch {
-		statusEl.textContent = "Couldn't reach the stream service.";
-		return;
-	  }
-	  if (!sessionId) {
-		statusEl.textContent = "Stream is offline.";
-		return;
-	  }
-
-	  playRegion(pickRegion());
-	}
-
-	window.addEventListener("DOMContentLoaded", main);
+    window.addEventListener("DOMContentLoaded", main);
   </script>
-
 </body>
 </html>
