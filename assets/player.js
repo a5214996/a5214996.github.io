@@ -21,7 +21,6 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     const statusEl = document.getElementById("status");
     let player = null;
     let sessionId = null;
-    let channel = null;
     window.currentRegion = "";
 
     // ---- Server entry in Shaka's overflow (⋮) menu ----------------------
@@ -132,41 +131,18 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
     }
     window.playRegion = playRegion;
 
-    // ---- Watch for a stream that WAS playing going offline ---------------
-    // Shaka raises an error when the manifest 404s. If the stream had been playing,
-    // check the API once a minute (for up to 5 minutes) until it is live again.
-    const RECHECK_MS = 60000;   // one lookup per minute
-    const MAX_CHECKS = 5;       // ...for 5 minutes
-    let wasPlaying = false;
-    let watching = false;
-
-    video.addEventListener("playing", () => { wasPlaying = true; });
-
-    function watchForRestart() {
-      if (watching) return;
-      watching = true;
-      wasPlaying = false;
-      statusEl.textContent = "Stream went offline, checking again soon...";
-      let checks = 0;
-
-      const timer = setInterval(async () => {
-        checks++;
-        try {
-          const id = await findSessionId(channel);
-          if (id) {                       // live again (maybe a new session id)
-            clearInterval(timer);
-            watching = false;
-            sessionId = id;
-            playRegion(window.currentRegion || localStorage.getItem("region") || "sfo");
-            return;
-          }
-        } catch {}
-        if (checks >= MAX_CHECKS) {
-          clearInterval(timer);
-          watching = false;
-          statusEl.textContent = "Stream is offline.";
+    // ---- Refresh when a stream that WAS playing goes offline --------------
+    function callRefreshVideo() {
+      try {
+        if (typeof refreshVideo === "function") return refreshVideo();
+        if (window.parent && typeof window.parent.refreshVideo === "function") {
+          return window.parent.refreshVideo();
         }
-      }, RECHECK_MS);
+      } catch (err) {
+        console.error("refreshVideo() failed", err);
+        return;
+      }
+      console.warn("refreshVideo() not found");
     }
 
     // ---- Startup ---------------------------------------------------------
@@ -189,13 +165,16 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
         ],
 		overflowMenuButtons: ["server"]
       });
+      let wasPlaying = false;
+      video.addEventListener("playing", () => { wasPlaying = true; });
       player.addEventListener("error", (e) => {
         console.error("Player error", e.detail);
-        if (wasPlaying && e.detail.code !== shaka.util.Error.Code.LOAD_INTERRUPTED) {
-          watchForRestart();
-        }
+        if (!wasPlaying || (e.detail && e.detail.code === shaka.util.Error.Code.LOAD_INTERRUPTED)) return;
+        wasPlaying = false;     // once per drop; the next "playing" event re-arms it
+        callRefreshVideo();
       });
 
+      let channel;
       try {
         channel = await loadChannel();
       } catch {
