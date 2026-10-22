@@ -3,7 +3,10 @@
     const streams = res.streams ||
       (res.channel ? [{ label: 'Feed 1', channel: res.channel, keys: res.keys }] : []);
     if (!streams.length) return;
-    if (res.start && res.start !== sessionStorage.getItem('st')) refresh = true;
+    if (res.start && res.start !== Number(sessionStorage.getItem('st')))
+	{
+		refresh = true;
+	}
     const first = streams[0];
     const c = sessionStorage.getItem('c');
     if (refresh || first.channel !== c) {
