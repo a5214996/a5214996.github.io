@@ -1,10 +1,17 @@
 ﻿function setVideo(refresh = false) {
   $.getJSON(`video.json?${Date.now()}`, (res) => {
+    const streams = res.streams ||
+      (res.channel ? [{ label: 'Feed 1', channel: res.channel, keys: res.keys }] : []);
+    if (!streams.length) return;
+
+    const first = streams[0];
     const c = sessionStorage.getItem('c');
-    if (res.channel && (refresh || res.channel !== c)) {
-      setPlayer(res.host, res.channel, res.urlparam);
-      sessionStorage.setItem('c', res.channel);
-      if (res.keys) sessionStorage.setItem('k', JSON.stringify(res.keys));
+    if (refresh || first.channel !== c) {
+      setPlayer(res.host, first.channel, res.urlparam);
+      sessionStorage.setItem('c', first.channel);
+      if (first.keys) sessionStorage.setItem('k', JSON.stringify(first.keys));
+      sessionStorage.setItem('s', JSON.stringify(streams));
+      sessionStorage.setItem('i', '0');
     }
   });
 }

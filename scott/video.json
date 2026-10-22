@@ -1,7 +1,40 @@
 {
   "host": "embed",
-  "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600088chi1000475tor/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false",
-  "keys": {
-    "dd5757bbcc8c3eb559a4b79e0dd638df": "a8ad38c531ff61f7138dbc06e9b2c738"
-  }
+  "streams": [
+    {
+      "label": "ESPN (ARENA)",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600005gsw1000445lal/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=2b6aae07-a6da-0a8e-0170-7f191779d161",
+      "keys": {
+        "bf12b3a5411d4353d506a3b600ab9bc0": "19b558988065681f57210fd2315b0467"
+      }
+    },
+    {
+      "label": "ESPN (STUDIO)",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600005gsw1000783lal/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=d935f971-c38f-5bab-0508-3519b2592a27",
+      "keys": {
+        "75b881e6cb9af85191801f9685f2be00": "c8b7321e98ff782f124ed83d49486762"
+      }
+    },
+    {
+      "label": "SPANISH",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600005gsw1000440lal/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=ef9bf037-2e9a-c2e1-c7db-6c0d009a05d3",
+      "keys": {
+        "8a5cde2c009d44e5f98d73976324c870": "00ffa392b251b6bfb5d32b5dfc08be8c"
+      }
+    },
+    {
+      "label": "PORTUGUESE",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600005gsw1000436lal/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=3cc4e335-88cf-39d0-697f-49ba29a21b90",
+      "keys": {
+        "eb770942072724779310b67194cc888d": "92ece5631790cbb38d7ffd15bb24f0c3"
+      }
+    },
+    {
+      "label": "MOBILE",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600005gsw1000444lal/index.m3u8?start=2026-10-21T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=3d5bf0fb-4038-00a9-e0b1-113badd8e61a",
+      "keys": {
+        "028e96563cd05f2e74e342b1bc76de93": "382baf655ccf2b8eecd8fe154c5535b9"
+      }
+    }
+  ]
 }
