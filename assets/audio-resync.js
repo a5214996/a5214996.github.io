@@ -33,7 +33,6 @@ function initAudioResync(video, player) {
 
   function resyncAudio(reason) {
     if (resyncing || video.paused || video.seeking || video.readyState < 3) return;
-    console.log('[resync]', reason || 'manual', 'at', video.currentTime.toFixed(2));
     // The seek restarts the audio output, which clicks if it lands mid-sound:
     // fade out, seek, fade back in. Nothing to fade if already muted.
     const original = video.volume;
@@ -99,16 +98,6 @@ function initAudioResync(video, player) {
   player.addEventListener('loading', () => {
     spliceTimes = [];
     lastPlayheadTime = 0;
-  });
-
-  // One-off check that the playlist timeline lines up with the player's: these two
-  // numbers should be within a few tens of seconds of each other.
-  player.addEventListener('loaded', () => {
-    setTimeout(() => {
-      console.log('[resync]', spliceTimes.length, 'splices found; playlist',
-                  (spliceTimes.playlistSeconds || 0).toFixed(1), 's, seekRange.end',
-                  player.seekRange().end.toFixed(1), 's');
-    }, 3000);
   });
 
   video.addEventListener('timeupdate', () => {
