@@ -189,25 +189,6 @@
     shaka.polyfill.installAll();
     player.addEventListener('error', onErrorEvent);
     controls.addEventListener('error', onErrorEvent);
-	
-    let retryTimer = null;
-    const reloadSoon = (e) => {
-      const code = e && e.detail && e.detail.code;
-      if (code === shaka.util.Error.Code.LOAD_INTERRUPTED) return;
-      if (retryTimer || !feeds[current]) return;
-      retryTimer = setTimeout(async () => {
-        retryTimer = null;
-        try { await loadFeed(player, feeds[current]); }
-        catch (err) { reloadSoon({ detail: err }); }
-      }, 3000);
-    };
-    player.addEventListener('error', reloadSoon);
-
-    let stallTimer = null;
-    player.addEventListener('buffering', (e) => {
-      clearTimeout(stallTimer);
-      if (e.buffering) stallTimer = setTimeout(reloadSoon, 15000);
-    });
 
     if (feeds.length) {
       player.configure({
