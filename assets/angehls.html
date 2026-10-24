@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stream</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { background: #000; color: #efeff1; font-family: system-ui, sans-serif; }
+
+    .stage { position: relative; width: 100%; height: 100%; }
+    video { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+	nav {
+	  position: absolute; left: 50%; bottom: max(64px, 12%);
+	  transform: translateX(-50%);
+	  display: flex; gap: clamp(6px, 1vw, 12px);
+	  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+	}
+	.stage.online:hover nav,
+	.stage.online:focus-within nav { opacity: 1; pointer-events: auto; }
+
+	button {
+	  padding: clamp(8px, 1.4vw, 14px) clamp(12px, 2vw, 22px);
+	  border: 2px solid #26262c;
+	  border-radius: 6px;
+	  background: #26262c;
+	  color: #b5b5bd;
+	  font: 600 clamp(13px, 1.5vw, 18px)/1 system-ui, sans-serif;
+	  letter-spacing: 0.04em;
+	  cursor: pointer;
+	}
+	button:hover:not(:disabled) { color: #fff; }
+	button:disabled { opacity: 0.4; cursor: default; }
+	button[aria-pressed="true"] { color: #fff; border-color: #fff; }
+
+    #status {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      margin: 0; padding: 16px; text-align: center; font-size: 16px; pointer-events: none;
+      text-shadow: 0 1px 4px #000;
+    }
+    #status:empty { display: none; }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <video id="player" controls autoplay playsinline></video>
+
+    <nav>
+	  <button data-region="sfo" disabled>SFO</button>
+	  <button data-region="nyc" disabled>NYC</button>
+      <button data-region="ams" disabled>AMS</button>
+      <button data-region="fra" disabled>FRA</button>
+      <button data-region="sgp" disabled>SGP</button>
+    </nav>
+
+    <p id="status">Loading...…</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+  <script>
+
+    const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
+
+    const API_HOST = "api.angelthump.com";
+    const EDGES = {
+      ams: "ams1.angelthump.com",
+      fra: "fra1.angelthump.com",
+      nyc: "nyc1.angelthump.com",
+      sfo: "sfo1.angelthump.com",
+      sgp: "sgp1.angelthump.com",
+    };
+
+    const stage = document.getElementById("stage");
+    const video = document.getElementById("player");
+    const statusEl = document.getElementById("status");
+    const buttons = [...document.querySelectorAll("[data-region]")];
+    let hls = null;
+    let sessionId = null;
+
+    async function loadChannel() {
+      const res = await fetch(CONFIG_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`video.json returned ${res.status}`);
+      const config = await res.json();
+      const channel = String(config.channel || "").trim().toLowerCase();
+      if (!/^[a-z0-9_]{1,32}$/.test(channel)) throw new Error("Bad channel in video.json");
+      return channel;
+    }
+
+    async function findSessionId(channel) {
+      const res = await fetch(
+        `https://${API_HOST}/v3/streams?username=${encodeURIComponent(channel)}`
+      );
+      if (!res.ok) throw new Error(`Lookup returned ${res.status}`);
+      const streams = await res.json();
+      const stream = streams.find((s) => s.type === "live");
+      if (!stream) return null;
+      const username = stream.user.username;
+      return `${btoa(stream.createdAt + username)}_${username}`;
+    }
+
+	function startPlayback() {
+	  video.play().catch(() => {
+		video.muted = true;
+		video.play().catch(() => {});
+	  });
+	}
+
+	function play(region) {
+	  const url = `https://${EDGES[region]}/hls/${sessionId}/index.m3u8`;
+
+	  buttons.forEach((b) =>
+		b.setAttribute("aria-pressed", String(b.dataset.region === region))
+	  );
+	  localStorage.setItem("region", region);
+	  statusEl.textContent = "";
+
+	  if (hls) { hls.destroy(); hls = null; }
+
+	  if (window.Hls && Hls.isSupported()) {
+		hls = new Hls();
+		hls.loadSource(url);
+		hls.attachMedia(video);
+		hls.on(Hls.Events.MANIFEST_PARSED, startPlayback);
+		hls.on(Hls.Events.ERROR, (_e, data) => {
+		  if (data.fatal) statusEl.textContent = `${region.toUpperCase()} failed — try another server`;
+		});
+	  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+		video.src = url;
+		startPlayback();
+	  } else {
+		statusEl.textContent = "This browser can't play HLS.";
+	  }
+	}
+
+    (async () => {
+      let channel;
+      try {
+        channel = await loadChannel();
+      } catch {
+        statusEl.textContent = "Couldn't read video.json.";
+        return;
+      }
+
+      try {
+        sessionId = await findSessionId(channel);
+      } catch {
+        statusEl.textContent = "Couldn't reach the stream service.";
+        return;
+      }
+      if (!sessionId) {
+        statusEl.textContent = "Stream is offline.";
+        return;
+      }
+
+      stage.classList.add("online");
+      buttons.forEach((b) => {
+        b.disabled = false;
+        b.addEventListener("click", () => play(b.dataset.region));
+      });
+      const saved = localStorage.getItem("region");
+      play(EDGES[saved] ? saved : "sfo");
+    })();
+  </script>
+</body>
+</html>
