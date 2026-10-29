@@ -126,7 +126,7 @@ const CONFIG_URL = new URL("video.json", window.parent.location.href).href;
       } catch (err) {
         if (err && err.code === shaka.util.Error.Code.LOAD_INTERRUPTED) return; // switched again
         console.error("Load failed", err);
-        statusEl.textContent = "Stream is offline. Refresh to look again";
+        statusEl.textContent = "Offline. Refresh to try again";
       }
     }
     window.playRegion = playRegion;
