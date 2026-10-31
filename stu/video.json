@@ -1,26 +1,4 @@
 {
-  "host": "embed",
-  "streams": [
-    {
-      "label": "PRIME VIDEO (STUDIO)",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600023lal1001456gsw/index.m3u8?start=2026-10-30T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=cce197a6-e67f-1ced-1c8b-ce6cf3960412",
-      "keys": {
-        "3d8b9a6bfb2b9a242dc9368999b8aafa": "165171f087859e5494a8b0bad6a45812"
-      }
-    },
-    {
-      "label": "PRIME VIDEO",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600023lal1001455gsw/index.m3u8?start=2026-10-30T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=898f4e6f-1b4f-a6f4-c271-26a1ba56e2c6",
-      "keys": {
-        "5ef0d8a9dc635ed1f41b520bcd0fd1b9": "d54b6f60534e0573024b9f762b6cd95b"
-      }
-    },
-    {
-      "label": "MOBILE",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600023lal1000444gsw/index.m3u8?start=2026-10-30T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=c97f7ea2-1efb-bd5d-989c-d09e89b6fa1f",
-      "keys": {
-        "e3f6842fd3e381eda64869ebca0b21f4": "a9972e0fcfb20b84a57b4ca21d7e32a1"
-      }
-    }
-  ]
+  "host": "angels",
+  "channel": "gwsd7259"
 }
