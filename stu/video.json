@@ -1,4 +1,40 @@
 {
-  "host": "angels",
-  "channel": "gwsd7259"
+  "host": "embed",
+  "streams": [
+    {
+      "label": "JAZZ (STUDIO)",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600147por1000830uta/index.m3u8?start=2026-10-31T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=d5cf579b-cdc6-1e92-c6f0-99bd94df5b3f",
+      "keys": {
+        "449315185152b9922fd4248080dffe83": "3226e12e656737499b5490ff72784699"
+      }
+    },
+    {
+      "label": "TRAIL BLAZERS (STUDIO)",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600147por1000811uta/index.m3u8?start=2026-10-31T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=b91ce9d6-89e1-2b48-3794-420e4a6cb5e8",
+      "keys": {
+        "f21b016c43e71d08b76fc44bbb60830f": "2284de4a2b09a18a2fa5606d4f9006f4"
+      }
+    },
+    {
+      "label": "JAZZ",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600147por1000476uta/index.m3u8?start=2026-10-31T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=428a30c3-07dc-b2a3-d381-a72ddeba2215",
+      "keys": {
+        "b3df9f9fbc5f6832b0165bdc4d70400e": "fb22377cfbbd7aaf82aab492a12a532f"
+      }
+    },
+    {
+      "label": "TRAIL BLAZERS",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600147por1000472uta/index.m3u8?start=2026-10-31T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=7a6898f1-fee1-e699-2d5f-79531084f986",
+      "keys": {
+        "bbf88bda85c4e3d4f64664ad0305d223": "7474a35d389ca0b1a4f24f2fd502533d"
+      }
+    },
+    {
+      "label": "MOBILE",
+      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600147por1000444uta/index.m3u8?start=2026-10-31T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=3c0a08ee-db00-5a1b-a60e-4e824ac5f06f",
+      "keys": {
+        "98d37f09d6f135cbb94d1d2d4edca4ef": "58ce02645e44a0c3cb95611f03323785"
+      }
+    }
+  ]
 }
