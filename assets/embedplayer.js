@@ -101,18 +101,8 @@ function guid() {
     feeds.forEach((feed, i) => {
       const item = document.createElement('button');
       item.setAttribute('aria-selected', String(i === current));
-
-      const dot = document.createElement('span');
-      dot.textContent = i === current ? '●' : '○';
-      dot.setAttribute('aria-hidden', 'true');
-      dot.style.display = 'inline-block';
-      dot.style.width = '1.5em';
-      dot.style.flexShrink = '0';
-
       const label = document.createElement('span');
-      label.textContent = feed.label;
-
-      item.appendChild(dot);
+      label.textContent = feed.label + (i === current ? ' ✓' : '');
       item.appendChild(label);
       item.addEventListener('click', () => switchFeed(i));
       this.menu.appendChild(item);
