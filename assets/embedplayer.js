@@ -78,7 +78,7 @@ function guid() {
     }
   }
 
-  const FEED_ICON_PATH = 'M80-200v-560h800v560H80ZM160-280h640v-400H160v400ZM400-360v-240l200 120-200 120Z';
+  const FEED_ICON_PATH = 'M120-840h320v320H120v-320Zm400 0h320v320H520v-320ZM120-440h320v320H120v-320Zm400 0h320v320H520v-320Z'
 
   class FeedSelection extends shaka.ui.SettingsMenu {
     constructor(parent, controls) {
@@ -149,9 +149,9 @@ function guid() {
       castReceiverAppId: '07AEE832',
       controlPanelElements: [
         'play_pause', 'mute', 'volume', 'time_and_duration', 'spacer',
-		 'overflow_menu', 'cast', 'fullscreen'
+		 'feed', 'overflow_menu', 'cast', 'fullscreen'
       ],
-      overflowMenuButtons: ['feed', 'quality', 'captions', 'language']
+      overflowMenuButtons: ['quality', 'captions', 'language']
     });
 
     shaka.polyfill.installAll();
