@@ -120,6 +120,7 @@ function guid() {
     }
   };
 
+  shaka.ui.Controls.registerElement('feed', new FeedSelection.Factory());
   shaka.ui.OverflowMenu.registerElement('feed', new FeedSelection.Factory());
 
   // ---------------------------------------------------------------------------
