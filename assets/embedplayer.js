@@ -85,6 +85,10 @@ class FeedSelection extends shaka.ui.SettingsMenu {
     this.button.classList.add('feed-selection-button', 'shaka-tooltip');
     this.menu.classList.add('feed-selection');
     this.button.setAttribute('aria-label', 'Feeds');
+
+    const back = this.menu.querySelector('.shaka-back-to-overflow-button');
+    if (back) back.style.display = 'none';
+
     feedMenu = this;
     this.refresh();
   }
