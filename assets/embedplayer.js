@@ -14,7 +14,6 @@ function guid() {
     console.error('Error code', error.code, 'object', error);
   }
 
-
   let feeds = [];
   let current = 0;
   let feedMenu = null;
@@ -81,37 +80,43 @@ function guid() {
   const FEED_ICON_PATH = 'M120-840h320v320H120v-320Zm400 0h320v320H520v-320ZM120-440h320v320H120v-320Zm400 0h320v320H520v-320Z'
 
   class FeedSelection extends shaka.ui.SettingsMenu {
-    constructor(parent, controls) {
-      super(parent, controls, FEED_ICON_PATH);
-      this.button.classList.add('feed-selection-button');
-      this.menu.classList.add('feed-selection');
-      this.button.setAttribute('aria-label', 'Feed');
-      this.nameSpan.textContent = 'Feed';
-      this.backSpan.textContent = 'Feed';
-      feedMenu = this;
-      this.refresh();
-    }
+  constructor(parent, controls) {
+    super(parent, controls, FEED_ICON_PATH);
+    this.button.classList.add('feed-selection-button', 'shaka-tooltip');
+    this.menu.classList.add('feed-selection');
+    this.button.setAttribute('aria-label', 'Feeds');
+    feedMenu = this;
+    this.refresh();
+  }
 
-    refresh() {
+  refresh() {
+    this.button.classList.toggle('shaka-hidden', feeds.length < 2);
+    this.currentSelection.textContent = feeds[current] ? feeds[current].label : '';
 
-      this.button.classList.toggle('shaka-hidden', feeds.length < 2);
-      this.currentSelection.textContent = feeds[current] ? feeds[current].label : '';
+    const back = this.menu.querySelector('.shaka-back-to-overflow-button');
+    Array.from(this.menu.children).forEach((c) => {
+      if (c !== back) c.remove();
+    });
 
-      const back = this.menu.querySelector('.shaka-back-to-overflow-button');
-      Array.from(this.menu.children).forEach((c) => {
-        if (c !== back) c.remove();
-      });
+    feeds.forEach((feed, i) => {
+      const item = document.createElement('button');
+      item.setAttribute('aria-selected', String(i === current));
 
-      feeds.forEach((feed, i) => {
-        const item = document.createElement('button');
-        item.setAttribute('aria-selected', String(i === current));
-        const label = document.createElement('span');
-        label.textContent = (i === current ? '✓ ' : '') + feed.label;
-        item.appendChild(label);
-        item.addEventListener('click', () => switchFeed(i));
-        this.menu.appendChild(item);
-      });
-    }
+      const dot = document.createElement('span');
+      dot.textContent = i === current ? '●' : '○';
+      dot.setAttribute('aria-hidden', 'true');
+      dot.style.display = 'inline-block';
+      dot.style.width = '1.5em';
+      dot.style.flexShrink = '0';
+
+      const label = document.createElement('span');
+      label.textContent = feed.label;
+
+      item.appendChild(dot);
+      item.appendChild(label);
+      item.addEventListener('click', () => switchFeed(i));
+      this.menu.appendChild(item);
+    });
   }
 
   FeedSelection.Factory = class {
@@ -120,8 +125,7 @@ function guid() {
     }
   };
 
-  shaka.ui.Controls.registerElement('feed', new FeedSelection.Factory());
-  shaka.ui.OverflowMenu.registerElement('feed', new FeedSelection.Factory());
+shaka.ui.Controls.registerElement('feed', new FeedSelection.Factory());
 
   // ---------------------------------------------------------------------------
 
