@@ -77,9 +77,9 @@ function guid() {
     }
   }
 
-  const FEED_ICON_PATH = 'M120-840h320v320H120v-320Zm400 0h320v320H520v-320ZM120-440h320v320H120v-320Zm400 0h320v320H520v-320Z'
+const FEED_ICON_PATH = 'M120-840h320v320H120v-320Zm400 0h320v320H520v-320ZM120-440h320v320H120v-320Zm400 0h320v320H520v-320Z';
 
-  class FeedSelection extends shaka.ui.SettingsMenu {
+class FeedSelection extends shaka.ui.SettingsMenu {
   constructor(parent, controls) {
     super(parent, controls, FEED_ICON_PATH);
     this.button.classList.add('feed-selection-button', 'shaka-tooltip');
@@ -108,12 +108,13 @@ function guid() {
       this.menu.appendChild(item);
     });
   }
+}
 
-  FeedSelection.Factory = class {
-    create(rootElement, controls) {
-      return new FeedSelection(rootElement, controls);
-    }
-  };
+FeedSelection.Factory = class {
+  create(rootElement, controls) {
+    return new FeedSelection(rootElement, controls);
+  }
+};
 
 shaka.ui.Controls.registerElement('feed', new FeedSelection.Factory());
 
