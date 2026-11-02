@@ -86,6 +86,14 @@ class FeedSelection extends shaka.ui.SettingsMenu {
     this.menu.classList.add('feed-selection');
     this.button.setAttribute('aria-label', 'Broadcasts');
 
+    // Hide the hover tooltip once the button is clicked
+    this.eventManager.listen(this.button, 'click', () => {
+  	this.button.classList.add('tooltip-suppressed');
+    });
+    const restoreTooltip = () => this.button.classList.remove('tooltip-suppressed');
+   this.eventManager.listen(this.button, 'mouseleave', restoreTooltip);
+    this.eventManager.listen(this.button, 'blur', restoreTooltip);
+
     const back = this.menu.querySelector('.shaka-back-to-overflow-button');
     if (back) back.style.display = 'none';
 
