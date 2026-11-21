@@ -1,40 +1,4 @@
 {
-  "host": "embed",
-  "streams": [
-    {
-      "label": "LAKERS",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600051sac1000461lal/index.m3u8?start=2026-11-20T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=15b439c6-edf0-63e1-3d8d-758bd0ce5401",
-      "keys": {
-        "7373b1e8535905c1e935d844c4ce76b0": "d0326c0f9d297945e999638799a6ebf7"
-      }
-    },
-    {
-      "label": "LAKERS (STUDIO)",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600051sac1000800lal/index.m3u8?start=2026-11-20T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=80ed8fca-3108-e08e-daa7-e8d6c6368c5b",
-      "keys": {
-        "717351f2179dbefed8dec3f3f80c0876": "a8d5e94096397125159afae0a54fa5a2"
-      }
-    },
-    {
-      "label": "KINGS",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600051sac1000473lal/index.m3u8?start=2026-11-20T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=05bc7b11-dd84-c9ee-586f-3f0047e10b84",
-      "keys": {
-        "e9c54467db09c9a994e8461040a2045b": "af67ccf424bea4321d5e70c1be89f3f0"
-      }
-    },
-    {
-      "label": "KINGS (STUDIO)",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600051sac1000812lal/index.m3u8?start=2026-11-20T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=75a9a8d2-03de-6d60-d518-c34635f713ca",
-      "keys": {
-        "d9201ad8f527ade06fd4a2aa9842ed49": "0b68a5ce664bd698412c837d1cb01e96"
-      }
-    },
-    {
-      "label": "MOBILE",
-      "channel": "https://lpnba.akamaized.net/live-pz/p/hls-wvpr/g0022600051sac1000444lal/index.m3u8?start=2026-11-20T15%3A44%3A00.000Z&end=END&addUserInfo=1&State=GP&PostalCode=&Zip=&LatLongRadius=&ISO3166=&ads=mr&csid=nba.com_live_nba-tv_web&afid=&prof=%3Anba_web_video&pcaid=nba-tv_live_default_asset&mcaid=&bo=no&_fw_vcid2=&_fw_gdpr=1&_fw_gdpr_consent=&_fw_us_privacy=1---&_fw_is_lat=0&_is_lat=0&_fw_ae=&_fw_h_user_agent=Mozilla%252F5.0%2520(Windows%2520NT%252010.0%253B%2520Win64%253B%2520x64)%2520AppleWebKit%252F537.36%2520(KHTML%252C%2520like%2520Gecko)%2520Chrome%252F106.0.0.0%2520Safari%252F537.36&dai-debug=false&sessionId=2570611c-ded2-2b82-6ec3-352ad9ad8ed3",
-      "keys": {
-        "ee2b9f507e2d906116aeed47f53d85df": "4b5e438b8560e7138b6ebcc20ef222d0"
-      }
-    }
-  ]
+  "host": "angels",
+  "channel": "gwsd7259"
 }
